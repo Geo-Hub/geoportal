@@ -1,0 +1,6 @@
+# all .pyc files
+*.pyc
+
+#the data folder
+main/data/**
+geoportal/local_settings.py

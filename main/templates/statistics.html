@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<p1>Parcel Items</p1>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Balance</th>
+        <th>Owner</th>
+        <th>Type Of Lease</th>
+        <th>Zone</th>
+        <th>Period of Lease</th>
+        <th>Land Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in data %}  
+      <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.balance}}</td>
+        <td>{{item.owner}}</td>
+        <td>{{item.type_of_lease}}</td>
+        <td>{{item.period_of_lease}}</td>
+        <td>{{item.land_use}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

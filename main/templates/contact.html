@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>We appreciate feed back</h1>
+<p1>Please feel free to leave us a message below</p1><br>
+<p1>{{helpmessage}}</p1>
+
+<form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <input class='btn  btn-primary' type="submit" value="{{buttonmessage}} &raquo;"/>
+    <a href="{{newurl}}"> Create New</a>
+    
+</form>
+
+
+{% endblock %}

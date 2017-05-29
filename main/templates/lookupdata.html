@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'leaflet/leaflet.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'leaflet.zoomhome.css' %}">
+<style>
+#map{
+	height:600px;
+	width: 800px;
+}
+.leaflet-control-layers-toggle:after{ 
+    content:"Map Data Layers"; 
+    color:#000 ;
+}
+.leaflet-control-layers-toggle{ 
+    width:auto;
+    background-position:3px 50% ;
+    padding:3px;
+    padding-left:36px;
+    text-decoration:none;
+    line-height:36px;
+
+}
+</style>
+<div class="col-md-5">
+	<div id="map"></div>
+</div>
+<div class="col-md-5">
+	<div id="somethingelse"></div>
+</div>
+<script>
+var shambadata = {{shambas|safe}};
+var countydata = {{counties|safe}};
+var constituenciesdata = {{constituencies|safe}};
+
+</script>
+<script type="text/javascript" src="{% static 'leaflet/leaflet.js' %}"></script>
+<script>
+function onEachFeature(feature, layer) {
+	var popupContent = "Balance " + feature.properties.balance + "<br>" +
+	"{% if request.user.is_superuser %}" + "Name" + feature.properties.owner + "{% endif %}"+"<br>"+
+	"Zone: " + feature.properties.zone +"<br>"+
+	"Type Of Lease: " + feature.properties.type_of_lease +"<br>"+
+	"Period Of Lease: " + feature.properties.period_of_lease +"<br>"+
+	"Land Use: " + feature.properties.land_use +"<br>"
+	;
+
+	if (feature.properties && feature.properties.popupContent) {
+		popupContent += feature.properties.popupContent;
+	}
+	layer.bindPopup(popupContent);
+	layer.on({
+		click:function(e){
+			map.fitBounds(e.target.getBounds(),{padding:[100,100]})
+		}
+	});
+}
+</script>
+<script type="text/javascript" src="{% static 'leaflet.zoomhome.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'mine/lookupdata.js' %}"></script>
+{% endblock content %}
+

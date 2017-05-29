@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row container-fluid">
+	<h1>Hi <a href="#">{{user.username}}</a></h1>
+
+	{% if shambas %}
+	{{shambas.owner}}
+	{% else %}
+	<h1>You have no Shambas to your name</h1>
+	{% endif %}
+</div>
+{% endblock content %}
