@@ -14,10 +14,11 @@ postgresql dbms with postgis extension
 7. Create superuser
 8. Copy [data folder](https://drive.google.com/open?id=0B3BfzupGx1AFNzRLUGRnanlkWk0) to main app directory
 9. Run the following scripts in _manage.py shell_
-* load.py
-*
-*
-*
+* > load.py
+* > loadcons.py
+* > loaddiv.py
+* > loadloc.py
+* > loadsubloc.py
 10. Run the app _manage.py runserver_
 
 #### Contributors (Team GeoHub)
