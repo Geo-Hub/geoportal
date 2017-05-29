@@ -12,7 +12,7 @@
 postgresql dbms with postgis extension
 6. Run migrations
 7. Create superuser
-8. Copy data folder to main app directory
+8. Copy [data folder](https://drive.google.com/open?id=0B3BfzupGx1AFNzRLUGRnanlkWk0) to main app directory
 9. Run the following scripts in _manage.py shell_
 * load.py
 *
