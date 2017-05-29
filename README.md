@@ -27,7 +27,10 @@ postgresql dbms with postgis extension
 4. Thomas Muteti
 5. James Mwangi
 
-#### Screen SHots
+#### Screen Shots
+1. Kiambu County loaded on the data page
 ![Kiambu County](screenshots/kiambu_county.png)
+2. Kiambu constituency loaded on the data page
 ![Constituency View](screenshots/constituency_view.png)
+3. Farms (Shambas) loaded on the data page
 ![Shamba View Example](screenshots/shamba_view_rates_paid.png)
