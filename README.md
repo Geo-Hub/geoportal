@@ -26,3 +26,8 @@ postgresql dbms with postgis extension
 3. Sophia Njeri
 4. Thomas Muteti
 5. James Mwangi
+
+#### Screen SHots
+![Kiambu County](screenshots/kiambu_county.png)
+![Constituency View](screenshots/constituency_view.png)
+![Shamba View Example](screenshots/shamba_view_rates_paid.png)
