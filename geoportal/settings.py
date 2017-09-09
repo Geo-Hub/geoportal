@@ -41,9 +41,9 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'leaflet',
     'chartit',
-    'main',
     'registration',
     'crispy_forms',
+    'main',
 )
 
 MIDDLEWARE_CLASSES = (

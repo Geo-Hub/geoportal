@@ -2,20 +2,27 @@ from django.contrib.gis.db import models
 from django.conf import settings
 
 # Create your models here.
+
+
 class Registration(models.Model):
     submitted_from = models.CharField(max_length=50,null=False)
     parcel_no = models.CharField(max_length=20,null=False)
     date_submitted = models.DateTimeField(auto_now_add=True,null=False)
+
     def __unicode__(self):
         return self.submitted_from
+
+
 class ContactMessage(models.Model):
     name_of_sender = models.CharField(max_length=50,null=False)
     email_address = models.EmailField(max_length=254,null=False)
     message = models.TextField(max_length=200,null=False)
 
+
 class OwnershipInfoManager(models.Manager):
     def get_current_user(self,owner):
         return super(OwnershipInfoManager, self).filter(user=owner)
+
 
 class OwnershipInfo(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -25,8 +32,10 @@ class OwnershipInfo(models.Model):
 
     objects = OwnershipInfoManager()
 
+
 class RatesPayable(models.Model):
     pass
+
 
 class PaymentInfo(models.Model):
     amount = models.IntegerField()
@@ -34,7 +43,6 @@ class PaymentInfo(models.Model):
     date_of_payment = models.DateField()
     paid_by = models.CharField(max_length=50)
     paid_for = models.ForeignKey(OwnershipInfo, on_delete=models.CASCADE,null=True)
-
 
 
 class Shamba(models.Model):
@@ -77,11 +85,13 @@ class Shamba(models.Model):
     land_use = models.CharField(max_length=20,choices=LAND_USE_CHOICES,null=True)
     objects = models.GeoManager()
 
+
 class IdentifiedNew(models.Model):
     name = models.CharField(max_length=70, null=True)
     general_location = models.CharField(max_length=70,null=True)
     geom = models.MultiPolygonField(srid=4326)
     objects = models.GeoManager()
+
 
 class KiambuCounty(models.Model):
     id_0 = models.IntegerField()
@@ -104,6 +114,7 @@ class KiambuCounty(models.Model):
     shape_area = models.FloatField()
     geom = models.PolygonField(srid=4326)
     objects = models.GeoManager()
+
 
 class KiambuDivision(models.Model):
     id_0 = models.IntegerField()
@@ -184,6 +195,7 @@ class KiambuConstituencies(models.Model):
     pop_densty = models.IntegerField()
     geom = models.MultiPolygonField(srid=4326)
     objects = models.GeoManager()
+
 
 class MonthlyWeatherByCity(models.Model):
     month = models.IntegerField()
