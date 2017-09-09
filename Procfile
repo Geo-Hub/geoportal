@@ -1,1 +1,1 @@
-web: gunicorn geoportal.wsgi --log-file - --log-level debug
+web: gunicorn geoportal.wsgi:application --log-file - --log-level debug
