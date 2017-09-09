@@ -15,18 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from main import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^accounts/profile/$', include('main.urls')),
-    url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^$', views.home,name='home' ),
-    url(r'^about/', views.about, name='about'),
-    url(r'^contact/',views.contact, name='contact'),
-    url(r'^data/',views.data, name='data'),
-    url(r'^shamba/register/',views.registershamba, name='registershamba'),
-    url(r'^shamba/discard/',views.discardshamba,name='discardshamba'),
-    url(r'^shamba/changeowner/',views.changeowner,name='changeowner'),
-    url(r'^statistics/',views.statistics,name='statistics'),
-]
+    url(r'^', include("main.urls")),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+              + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# will enable below settings once I split local and production settings
+
+# if not settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
