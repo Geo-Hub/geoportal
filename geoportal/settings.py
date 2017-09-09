@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['geohub-geoportal.herokuapp.com']
+ALLOWED_HOSTS = ['geohub-geoportal.herokuapp.com', 'localhost']
 
 SITE_URL = "http://localhost:8000"
 # Application definition
@@ -153,4 +153,9 @@ except ImportError:
 
 # add this
 db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+if db_from_env:
+    DATABASES = {
+        'default': {
+            db_from_env
+        }
+    }
