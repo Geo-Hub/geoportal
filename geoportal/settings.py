@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'oevd80-ejebu*7$#fvirkdblze%!b4k7$@rbmru$y7*1+-w+im'
+# SECRET_KEY = '4ct$ragx!jn!@09061+#0lx+rgu&jyj@b6ev!i+edh2ef-f#at'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -93,6 +94,8 @@ WSGI_APPLICATION = 'geoportal.wsgi.application'
 
 
 
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -142,7 +145,12 @@ LEAFLET_CONFIG = {
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+# Extra local settings for db
 try:
     from local_settings import *
 except ImportError:
     pass
+
+# add this
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
