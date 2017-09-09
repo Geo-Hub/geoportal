@@ -158,5 +158,5 @@ GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
 
 db_from_env = dj_database_url.config()
 if db_from_env:
-    DATABASES['default'] = dj_database_url.config()
+    DATABASES = {'default': dj_database_url.config()}
     DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
