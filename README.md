@@ -3,6 +3,10 @@
 ### _Presented at the 2015 Jkuat Tech Expo_
 #### _Won most popular award_
 
+The app is up at [https://geohub-geoportal.herokuapp.com](https://geohub-geoportal.herokuapp.com)
+
+See the [Geo part here](https://geohub-geoportal.herokuapp.com/data/)
+
 ##### _Setup Instructions_
 1. Create a python 2.7 virtual environment
 2. Activate the virtual environment
