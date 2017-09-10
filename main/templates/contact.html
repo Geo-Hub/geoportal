@@ -1,15 +1,47 @@
 {% extends 'base.html' %}
+{% block services %}
+    <div class="col-md-3"></div>
+{% endblock services %}
 {% block content %}
-<h1>We appreciate feed back</h1>
-<p1>Please feel free to leave us a message below</p1><br>
-<p1>{{helpmessage}}</p1>
+    <h1>We appreciate feed back</h1>
+    <p1>Please feel free to leave us a message below</p1><br>
+    <p1>{{helpmessage}}</p1>
+    <br>
+    {% if showform %}
+        <div class="col-md-5">
+            <form method="POST">{% csrf_token %}
+                <input type="hidden" name="intention" id="intention" value="submit_form">
+                <div class="form-group">
+                    <label for="name_of_sender">Name of Sender</label>
+                    <input type="text" id="name_of_sender" name="name_of_sender" class="form-control" required>
+                </div>
+                <div>
+                    <label for="email_address">Email Address:</label>
+                    <input type="email" id="email_address" name="email_address" class="form-control" required>
+                </div>
+                <div>
+                    <label for="message">Message:</label>
+                    <textarea name="message" id="message" cols="40" rows="10" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <input class='btn  btn-primary' type="submit" value="Submit &raquo;"/>
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <form method="POST">{% csrf_token %}
+            <input type="hidden" name="intention" id="intention" value="create_new">
+            <input class='btn  btn-primary' type="submit" value="Create New &raquo;"/>
+        </form>
+    {% endif %}
 
-<form method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <input class='btn  btn-primary' type="submit" value="{{buttonmessage}} &raquo;"/>
-    <a href="{{newurl}}"> Create New</a>
-    
-</form>
+
+{#    <form method="POST">{% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <input class='btn  btn-primary' type="submit" value="{{buttonmessage}} &raquo;"/>#}
+{#        <a href="{{newurl}}"> Create New</a>#}
+{##}
+{#    </form>#}
 
 
-{% endblock %}
+{% endblock content %}
