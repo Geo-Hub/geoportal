@@ -26,10 +26,10 @@ postgresql dbms with postgis extension
 10. Run the app _manage.py runserver_
 
 #### Contributors (Team GeoHub)
-1. [Ng'eno Victor](http://twitter.com/ngenovictor)
-2. Nombu Murage
+1. [Ng'eno Victor](https://github.com/ngenovictor)
+2. [Nombu Murage](https://github.com/nombumurage)
 3. Sophia Njeri
-4. Thomas Muteti
+4. [Thomas Muteti](https://github.com/Thom03)
 5. James Mwangi
 
 #### Screen Shots
