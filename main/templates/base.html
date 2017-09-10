@@ -47,6 +47,17 @@
             {% if request.user.is_superuser %}
             <li><a href="/admin">Admin</a></li>
             {% endif %}
+             <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+
+                    <li><a href="{% url 'registershamba' %}">Register Land</a></li>
+                    <li><a href="{% url 'changeowner' %}">Change Ownership</a></li>
+                    <li><a href="{% url 'discardshamba' %}">Discard Ownership</a></li>
+                    <li><a href="{% url 'data' %}">Data</a></li>
+                    <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                  </ul>
+                </li>
           
           </ul>
           <ul style='padding-right:10px;' class="nav navbar-nav navbar-right">
