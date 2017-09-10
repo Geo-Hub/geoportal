@@ -152,6 +152,17 @@ try:
 except ImportError:
     pass
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "mailappvictor@gmail.com"  # my gmail username
+
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Victor <mailappvictor@gmail.com>"
+
+
+ADMINS = [('Justin', EMAIL_HOST_USER)]
+MANAGERS = ADMINS
+
 IS_DEPLOYED = os.getenv('IS_DEPLOYED')
 if IS_DEPLOYED:
     from os import environ
@@ -162,3 +173,5 @@ if IS_DEPLOYED:
     db_from_env = dj_database_url.config()
     DATABASES = {'default': dj_database_url.config()}
     DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # my gmail password
