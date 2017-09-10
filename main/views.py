@@ -37,7 +37,7 @@ def contact(request):
                 "Feedback on Geohub Geoportal by "+name,
                 message,
                 email_address,
-                ["mailappvictor@gmail.com"],
+                ["mailappvictor@gmail.com", "jimmywainaina@gmail.com", "thomas.muteti@gmail.com", "njerimurage92@gmail.com", "nombumurage@gmail.com"],
                 fail_silently=False
             )
 
