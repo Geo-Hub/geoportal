@@ -74,40 +74,41 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            {% block services %}
+
             <style>
             table{
               height: 100%;
               background-color: black;
             }
             </style>
-
-            <div class="col-md-3 sidebar-offcanvas" id="sidebar">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Services</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a href="{% url 'registershamba' %}">Register Land</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="{% url 'discardshamba' %}">Discard Ownership</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="{% url 'data' %}">Data</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="{% url 'statistics' %}">Statistics</a></td>
-                  </tr>
-                </tbody>  
-              </table>
-            </div>
+            {% block services %}
+                <div class="col-md-3 sidebar-offcanvas" id="sidebar">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Services</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><a href="{% url 'registershamba' %}">Register Land</a></td>
+                      </tr>
+                      <tr>
+                        <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
+                      </tr>
+                      <tr>
+                        <td><a href="{% url 'discardshamba' %}">Discard Ownership</a></td>
+                      </tr>
+                      <tr>
+                        <td><a href="{% url 'data' %}">Data</a></td>
+                      </tr>
+                      <tr>
+                        <td><a href="{% url 'statistics' %}">Statistics</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            {% endblock services %}
 
 
             <div class="container col-md-8"> 
@@ -116,11 +117,6 @@
                 {% endblock content %}
               
             </div>
-
-
-
-
-            {% endblock services %}                        
         </div>
 
 

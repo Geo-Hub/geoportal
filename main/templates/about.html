@@ -1,7 +1,40 @@
 {% extends 'base.html' %}
+{% block services %}
+    <div class="col-md-3"></div>
+{% endblock services %}
 {% block content %}
-<p1>This is essentially a form of Land Information System that can be utilised by the county governemnt to streamline revenue collection</p1>
-<p1>The following procedure illustrates the process by which the county governmets manage their revenue collection detail</p1>
-<img src="">
-<p1>By having a land information system incorporated into the county citizen's information, one can easily visualize where rates have not been paid and just from information on a map one can get the details on the amount of rates payable and the balance thereof</p1>
-{% endblock %}
+    <h1>About The Geohub Geoportal</h1>
+    <hr>
+    <p1>This web application utilises a Geographic Information System (GIS); using mapping and
+    coordinate information to demarcate and show land parcel information within a certain
+        jurisdiction to form the basis for a Land Information System(LIS)</p1>
+
+    <p>A LIS contains information about a parcel of land including</p>
+    <ol>
+        <li>Boundary</li>
+        <li>Tenure</li>
+        <li>Ownership</li>
+        <li>Liabilities on the land</li>
+        <li>Legal Attributes of the land</li>
+        <li>Usage and zone information</li>
+    </ol>
+
+    <p>In this case This Geoportal is a practical example of a GIS based system that might be used
+    by an authority to manage land resources. It is visual and interactive.</p>
+
+    <p>By tying up the system to a Land Rates payment system one can easily identify the following:</p>
+    <ol>
+        <li>Where is a certain piece of land located?</li>
+        <li>Who owns it?</li>
+        <li>Has the owner paid land rates this year?</li>
+        <li>Are there balances on rates and if so to what extent?</li>
+        <li>Who is assigned to collect rates within that jurisdiction?</li>
+    </ol>
+
+    <p>As such, this system seeks to streamline revenue collection and cut the avoidance of payment of rates.</p>
+    <hr>
+    <h3>Privacy</h3>
+    <p>For the purpose of demonstration the application uses sample information with near real except fake records.</p>
+    <p>It is meant to be used as a source of proof of concept and considering weighty matters of land no way intended to expose private information.</p>
+    <p>Feel free to report any concern to <a href="mailto:ngenovictor321@gmail.com">Ngeno Victor</a> for quick address and also for feedback.</p>
+{% endblock content %}
