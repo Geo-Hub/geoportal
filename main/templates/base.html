@@ -94,15 +94,17 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><a href="{% url 'registershamba' %}">Register Land</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="{% url 'discardshamba' %}">Discard Ownership</a></td>
-                      </tr>
+                      {% if request.user.is_staff %}
+                        <tr>
+                          <td><a href="{% url 'registershamba' %}">Register Land</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="{% url 'discardshamba' %}">Discard Ownership</a></td>
+                        </tr>
+                      {% endif %}
                       <tr>
                         <td><a href="{% url 'data' %}">Data</a></td>
                       </tr>
