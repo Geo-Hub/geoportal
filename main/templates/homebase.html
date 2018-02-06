@@ -13,150 +13,80 @@
     <title>{{title}}</title>
 	  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
-    <link href="{% static 'mine/css/carousel.css' %}" rel="stylesheet">	
+    <link rel="stylesheet" href="{% static 'mine/css/styles.css' %}">
 	
 </head>
 <body>
-  <style type="text/css">
-  .things{
-    color: black;
-  }
-
-  </style>
-    <div class="navbar-wrapper">
-      <div class="container">
-
-        <nav class="navbar navbar-inverse navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+  <div class="navbar-wrapper">
+    <div class="container">
+      <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">Geo Portal</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
+              {% if request.user.is_superuser %}
+              <li><a href="/admin">Admin</a></li>
+              {% endif %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'registershamba' %}">Register Land</a></li>
+                  <li><a href="{% url 'changeowner' %}">Change Ownership</a></li>
+                  <li><a href="{% url 'discardshamba' %}">Discard Ownership</a></li>
+                  <li><a href="{% url 'data' %}">Data</a></li>
+                  <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul style='padding-right:10px;' class="nav navbar-nav navbar-right">
+              <div class="btn-group">
+              <button type="button" class="btn navbar-btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.user }}<span class="caret"></span>
               </button>
-              <a class="navbar-brand" href="{% url 'home' %}">Geo Portal</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
-                {% if request.user.is_superuser %}
-                <li><a href="/admin">Admin</a></li>
+              <ul class="dropdown-menu">
+                {% if not request.user.is_authenticated %}
+                <li><a href="{% url 'registration_register' %}">Register</a></li>
+                <li><a href="{% url 'auth_login' %}">Log In</a></li>
+                {% endif %}                  
+
+                {% if request.user.is_authenticated %}
+                <li><a href="http://127.0.0.1:8000/accounts/profile/">Profile</a></li>
+                <li><a href="{% url 'auth_password_change' %}">Change Password</a></li>
+                <li><a href="{% url 'auth_password_reset' %}">Reset Password</a></li>
+                <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                 {% endif %}
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    
-                    <li><a href="{% url 'registershamba' %}">Register Land</a></li>
-                    <li><a href="{% url 'changeowner' %}">Change Ownership</a></li>
-                    <li><a href="{% url 'discardshamba' %}">Discard Ownership</a></li>
-                    <li><a href="{% url 'data' %}">Data</a></li>
-                    <li><a href="{% url 'statistics' %}">Statistics</a></li>
-                  </ul>
-                </li>
               </ul>
-              <ul style='padding-right:10px;' class="nav navbar-nav navbar-right">
-                <div class="btn-group">
-                  <button type="button" class="btn navbar-btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.user }}<span class="caret"></span>
-                  </button>
-
-                <!-- <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ request.user }}<span class="caret"></span></a> -->
-                  <ul class="dropdown-menu">
-                    {% if not request.user.is_authenticated %}
-                    <li><a href="{% url 'registration_register' %}">Register</a></li>
-                    <li><a href="{% url 'auth_login' %}">Log In</a></li>
-                    {% endif %}                  
-
-                    {% if request.user.is_authenticated %}
-                    <li><a href="http://127.0.0.1:8000/accounts/profile/">Profile</a></li>
-                    <li><a href="{% url 'auth_password_change' %}">Change Password</a></li>
-                    <li><a href="{% url 'auth_password_reset' %}">Reset Password</a></li>
-                    <li><a href="{% url 'auth_logout' %}">Logout</a></li>
-                    {% endif %}
-                  </ul>
-            </div>
+            </ul>
           </div>
-        </nav>
-
-      </div>
+        </div>
+      </nav>
     </div>
+  </div>
+  <div class="home-content">
+    {% block content %}
+    {% endblock content %}
+  </div>
 
-
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img class="first-slide" src="{% static 'image/marketing/management-of-tatu-city-pic1.jpg' %}" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption things">
-              <h1>Kiambu County</h1>
-              <p>Are you a citizen of Kiambu County? Do you own land? Check if you have paid your land rates. </p>
-              <p><a class="btn btn-lg btn-primary" href="{% url 'registration_register' %}" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="second-slide" src="{% static 'image/marketing/Tatu-City-Kenya.jpg' %}" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption things">
-              <h1>The Kiambu Land System</h1>
-              <p>The county has created a portal for all the citizens that own land in Kiambu County to tally and pay their land rates for the purpose of develoment in the county. Help us to help you</p>
-              <p><a class="btn btn-lg btn-primary" href="{% url 'about' %}" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="third-slide" src="{% static 'image/marketing/tatu1.jpg' %}" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption things">
-              <h1>Our Services</h1>
-              <p>To view more of services and information please check out the services link above</p>
-              <p><a class="btn btn-lg btn-primary" href="{% url 'registration_register' %}" role="button">Sign Up First</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div><!-- /.carousel -->
-
-	{% block content %}
-
-
-
-
-
-
-
-
-	{% endblock content %}
-
-      <!-- FOOTER -->
-      <footer>
+  <!-- FOOTER -->
+  <footer>
+    <div id="footer-wrapper">
         <p>&copy; 2017 Team Geohub &middot; <a href={% url "about" %}>Privacy</a></p>
-      </footer>
+    </div>
+  </footer>
 
-    </div><!-- /.container -->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
   <script type="text/javascript" src="{% static 'jquery-1.11.3.js' %}"></script>
 	<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
 
