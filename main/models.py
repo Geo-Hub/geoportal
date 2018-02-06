@@ -85,6 +85,15 @@ class Shamba(models.Model):
     land_use = models.CharField(max_length=20,choices=LAND_USE_CHOICES,null=True)
     objects = models.GeoManager()
 
+class LandOwner(models.Model):
+    first_name = models.CharField(max_length=200)
+    second_name = models.CharField(max_length=200)
+    surname = models.CharField(max_length=200)
+    id_number = models.IntegerField()
+    land = models.ForeignKey(Shamba, on_delete=models.CASCADE)
+
+
+
 
 class IdentifiedNew(models.Model):
     name = models.CharField(max_length=70, null=True)

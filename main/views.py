@@ -1,7 +1,7 @@
 from django.core import mail
 from django.shortcuts import render
 from .models import *
-from .forms import *
+from .forms import LandRegistrationForm
 from django.http import HttpResponseRedirect
 from django.core.serializers import serialize
 from chartit import DataPool, Chart
@@ -81,27 +81,14 @@ def data(request):
 def registershamba(request):
     template = 'registershamba.html'
     title = 'Register'
-    message = None
+    reg_form = LandRegistrationForm()
+    context = {
+        'title':title,
+        'reg_form': reg_form
+    }
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.save()
-        message = 'Sent'
-        context = {
-            'form': form,
-            'message': message,
-            'title': title,
-        }
-        return render(request, template, context)
+        pass
     else:
-        message = 'Fill below'
-        form = RegistrationForm
-        context = {
-            'title': title,
-            'message': message,
-            'form': form,
-        }
         return render(request, template, context)
 
 
