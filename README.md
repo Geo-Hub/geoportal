@@ -43,4 +43,4 @@ See the [Geo part here](https://geohub-geoportal.herokuapp.com/data/)
 2. Kiambu constituency loaded on the data page
     ![Constituency View](screenshots/constituency_view.png)
 3. Farms (Shambas) loaded on the data page
-    ![Shamba View Example](screenshots/shamba_view_rates_paid.png) 
+    ![Shamba View Example](screenshots/shamba_view_rates_paid.png)
