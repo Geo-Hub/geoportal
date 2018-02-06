@@ -6,16 +6,12 @@
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 <div class="row container-fluid">
 	<div class="col-md-5">
-	</div>
-	<div class="col-md-5">
-		
 		<form action="." method="POST">{% csrf_token %}
 			<div class="form-group">
-		    {{ form|crispy }}
+		    {{ reg_form|crispy }}
 		    <input type="submit" value="Submit" />
 		    </div>
 		</form>
-		
 	</div>
 </div>
 
