@@ -85,6 +85,9 @@ class Shamba(models.Model):
     land_use = models.CharField(max_length=20,choices=LAND_USE_CHOICES,null=True)
     objects = models.GeoManager()
 
+    def __str__(self):
+        return str(self.parcel_no)
+
 class LandOwner(models.Model):
     first_name = models.CharField(max_length=200)
     second_name = models.CharField(max_length=200)
