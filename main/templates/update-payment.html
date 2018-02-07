@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block colours %}
+<div style="border: 2px solid red;background-color: lightgrey;text-align:center;">
+    <h4>Update Yearly Payments</h4>
+    <hr>
+    <form action="." method="POST"> {% csrf_token %}
+        <input type="text" name="post-type" value="yearly-update" hidden>
+        <button class="btn btn-danger">Add yearly charges</button>
+    </form>
+</div>
+<p><strong>Colour Guide</strong></p>
+<table>
+    <tr>
+        <th>Amount</th>
+        <th>Colour</th>
+    </tr>
+    <tr>
+        <td>Above 250</td>
+        <td style="background-color:#ff0000">Red</td>
+    </tr>
+    <tr>
+        <td>Above 0+</td>
+        <td style="background-color:#6666ff">Blue</td>
+    </tr>
+    <tr>
+        <td>Any other</td>
+        <td style="background-color:#00ff00">Green</td>
+    </tr>
+</table>
+{% endblock colours %}
+{% block content %}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+    <table>
+        <tr>
+            <th>Parcel No</th>
+            <th>Owner</th>
+            <th>Balance</th>
+            <th>Add Arrears</th>
+            <th>Add Payment</th>
+        </tr>
+        {% for shamba in shambas %}
+            <tr>
+                <td>{{shamba.parcel_no}}</td>
+                <td>{{shamba.owner}}</td>
+                {% if shamba.balance > 250 %}
+                    <style>.balance{background-color: #ff0000;}</style>
+                {% elif shamba.balance >= 0 %}
+                    <style>.balance{background-color: #6666ff;}</style>
+                {% else %}
+                    <style>.balance{background-color: #00ff00;}</style>
+                {% endif %}
+                <td class="balance">{{shamba.balance}}</td>
+                <style>
+                    input{
+                        width: 100%;
+                    }
+                    button{
+                        width: 100%;
+                    }
+                </style>
+                <form action="." method="POST">{% csrf_token %}
+                    <input type="text" name="post-type" value="payment-update" hidden>
+                    <input type="text" hidden value="{{shamba.id}}" name="shamba-id">
+                    <td>
+                        <input type="text" name="arrears-update">
+                    </td>
+                    <td>
+                        <input type="text" name="payment-update">
+                    </td>
+                    <td>
+                        <button type="submit">Edit</button>
+                    </td>
+                </form>
+            </tr>
+        {% endfor %}
+
+    </table>
+    
+{% endblock %}
+<!-- d > 250	? '#ff0000' :
+           d > 1  	? '#6666ff' :
+           d > 'Null' ? '#00ff00' :           
+                      '#00ff00'; -->
+
+<!-- shamba_owner = models.ForeignKey(OwnershipInfo, on_delete=models.CASCADE,null=True)
+    balance = models.IntegerField(null=True)
+    objectid_1 = models.IntegerField()
+    objectid = models.IntegerField()
+    shape_leng = models.FloatField()
+    y_coordina = models.IntegerField()
+    x_coordina = models.IntegerField()
+    perimeter = models.IntegerField()
+    parcel_no = models.IntegerField()
+    owner = models.CharField(max_length=254)
+    soil_type = models.CharField(max_length=254)
+    state = models.CharField(max_length=254)
+    cost_value = models.IntegerField()
+    pic_url = models.CharField(max_length=254)
+    electricit = models.CharField(max_length=254)
+    water = models.CharField(max_length=254)
+    outlinetra = models.FloatField()
+    shape_le_1 = models.FloatField()
+    shape_area = models.FloatField()
+    geom = models.MultiPolygonField(srid=4326)
+    type_of_lease = models.CharField(max_length=20,choices=LEASE_CHOICES,null=True)
+    zone = models.CharField(max_length=20,choices=ZONE_CHOICES,null=True)
+    period_of_lease = models.IntegerField(null=True)
+    land_use = models.CharField(max_length=20,choices=LAND_USE_CHOICES,null=True)
+    objects = models.GeoManager() -->

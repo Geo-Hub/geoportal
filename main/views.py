@@ -1,7 +1,7 @@
 from django.core import mail
 from django.shortcuts import render
 from .models import *
-from .forms import *
+from .forms import LandRegistrationForm
 from django.http import HttpResponseRedirect
 from django.core.serializers import serialize
 from chartit import DataPool, Chart
@@ -81,29 +81,51 @@ def data(request):
 def registershamba(request):
     template = 'registershamba.html'
     title = 'Register'
-    message = None
+    reg_form = LandRegistrationForm()
+    context = {
+        'title':title,
+        'reg_form': reg_form
+    }
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.save()
-        message = 'Sent'
-        context = {
-            'form': form,
-            'message': message,
-            'title': title,
-        }
-        return render(request, template, context)
+        pass
     else:
-        message = 'Fill below'
-        form = RegistrationForm
-        context = {
-            'title': title,
-            'message': message,
-            'form': form,
-        }
         return render(request, template, context)
 
+def update_payment(request):
+    template = 'update-payment.html'
+    shambas = Shamba.objects.all().order_by('-parcel_no')[:20]
+    context = {
+        'shambas':shambas
+    }
+    if request.method == "POST":
+        post_type = request.POST.get('post-type')
+        if post_type == "yearly-update":
+            for shamba in Shamba.objects.all():
+                try:
+                    value = int(shamba.balance)
+                    new_bal = value+100
+                    shamba.balance = new_bal
+                    shamba.save()
+                except Exception:
+                    shamba.balance = 100
+                    shamba.save()
+        elif post_type == "payment-update":
+            arrears = request.POST.get('arrears-update')
+            payment = request.POST.get('payment-update')
+            shamba_id = request.POST.get('shamba-id')
+            shamba_obj = Shamba.objects.get(id=int(shamba_id))   
+            try:
+                new_bal = int(shamba_obj.balance) # db has saved int value
+            except Exception: # db has maybe none in db
+                new_bal = 0
+            if payment:
+                new_bal -= int(payment)
+            if arrears:
+                new_bal += int(arrears)
+            shamba_obj.balance = new_bal
+            shamba_obj.save()
+            
+    return render(request, template, context)
 
 def discardshamba(request):
     template = 'discardshamba.html'

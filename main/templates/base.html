@@ -52,6 +52,7 @@
                   <ul class="dropdown-menu">
 
                     <li><a href="{% url 'registershamba' %}">Register Land</a></li>
+                    <li><a href="{% url 'payment' %}">Update Payment</a></li>
                     <li><a href="{% url 'changeowner' %}">Change Ownership</a></li>
                     <li><a href="{% url 'discardshamba' %}">Discard Ownership</a></li>
                     <li><a href="{% url 'data' %}">Data</a></li>
@@ -85,13 +86,6 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-
-            <style>
-            table{
-              height: 100%;
-              background-color: black;
-            }
-            </style>
             {% block services %}
                 <div class="col-md-3 sidebar-offcanvas" id="sidebar">
                   <table class="table table-bordered">
@@ -101,15 +95,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><a href="{% url 'registershamba' %}">Register Land</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="{% url 'discardshamba' %}">Discard Ownership</a></td>
-                      </tr>
+                      {% if request.user.is_staff %}
+                        <tr>
+                          <td><a href="{% url 'registershamba' %}">Register Land</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="{% url 'payment' %}">Update Payment</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="{% url 'discardshamba' %}">Discard Ownership</a></td>
+                        </tr>
+                      {% endif %}
                       <tr>
                         <td><a href="{% url 'data' %}">Data</a></td>
                       </tr>
@@ -118,6 +117,10 @@
                       </tr>
                     </tbody>
                   </table>
+                  <div>
+                    {% block colours %}
+                    {% endblock colours %}
+                  </div>
                 </div>
             {% endblock services %}
 

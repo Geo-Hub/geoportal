@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^contact/',views.contact, name='contact'),
     url(r'^data/',views.data, name='data'),
     url(r'^shamba/register/',views.registershamba, name='registershamba'),
+    url(r'^shamba/update-payment/',views.update_payment, name='payment'),
     url(r'^shamba/discard/',views.discardshamba,name='discardshamba'),
     url(r'^shamba/changeowner/',views.changeowner,name='changeowner'),
     url(r'^statistics/',views.statistics,name='statistics'),

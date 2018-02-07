@@ -1,5 +1,5 @@
 from django.contrib.gis import forms
-from .models import *
+from .models import ContactMessage, LandOwner
 
 
 class ContactMessageForm(forms.ModelForm):
@@ -13,10 +13,11 @@ class ContactMessageForm(forms.ModelForm):
         ]
 
 
-class RegistrationForm(forms.ModelForm):
+class LandRegistrationForm(forms.ModelForm):
     class Meta:
-        model = Registration
+        model = LandOwner
         fields = [
-            'submitted_from',
-            'parcel_no',
+            'land',
+            'first_name',
+            'second_name',
         ]
