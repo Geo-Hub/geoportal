@@ -91,6 +91,38 @@ def registershamba(request):
     else:
         return render(request, template, context)
 
+def update_payment(request):
+    template = 'update-payment.html'
+    shambas = Shamba.objects.all().order_by('-parcel_no')[:10]
+    context = {
+        'shambas':shambas
+    }
+    if request.method == "POST":
+        post_type = request.POST.get('post-type')
+        if post_type == "yearly-update":
+            for shamba in Shamba.objects.all():
+                try:
+                    value = int(shamba.balance)
+                    new_bal = value+100
+                    shamba.balance = new_bal
+                    shamba.save()
+                except Exception:
+                    shamba.balance = 100
+                    shamba.save()
+        elif post_type == "payment-update":
+            shamba_id = request.POST.get('shamba-id')
+            shamba_obj = Shamba.objects.get(id=int(shamba_id))
+            payment = int(request.POST.get('payment-update'))
+            try:
+                value = int(shamba_obj.balance)
+                new_bal = value-payment
+                shamba_obj.balance = new_bal
+                shamba_obj.save()
+            except Exception:
+                shamba_obj.balance = -payment
+                shamba_obj.save()
+            
+    return render(request, template, context)
 
 def discardshamba(request):
     template = 'discardshamba.html'

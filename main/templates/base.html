@@ -52,6 +52,7 @@
                   <ul class="dropdown-menu">
 
                     <li><a href="{% url 'registershamba' %}">Register Land</a></li>
+                    <li><a href="{% url 'payment' %}">Update Payment</a></li>
                     <li><a href="{% url 'changeowner' %}">Change Ownership</a></li>
                     <li><a href="{% url 'discardshamba' %}">Discard Ownership</a></li>
                     <li><a href="{% url 'data' %}">Data</a></li>
@@ -99,6 +100,9 @@
                           <td><a href="{% url 'registershamba' %}">Register Land</a></td>
                         </tr>
                         <tr>
+                          <td><a href="{% url 'payment' %}">Update Payment</a></td>
+                        </tr>
+                        <tr>
                           <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
                         </tr>
                         <tr>
@@ -113,6 +117,10 @@
                       </tr>
                     </tbody>
                   </table>
+                  <div>
+                    {% block colours %}
+                    {% endblock colours %}
+                  </div>
                 </div>
             {% endblock services %}
 

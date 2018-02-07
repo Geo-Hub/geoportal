@@ -43,6 +43,7 @@
                 <ul class="dropdown-menu">
                   {% if request.user.is_staff %}
                     <li><a href="{% url 'registershamba' %}">Register Land</a></li>
+                    <li><a href="{% url 'payment' %}">Update Payment</a></li>
                     <li><a href="{% url 'changeowner' %}">Change Ownership</a></li>
                     <li><a href="{% url 'discardshamba' %}">Discard Ownership</a></li>
                   {% endif %}
