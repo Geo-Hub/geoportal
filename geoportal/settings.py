@@ -146,12 +146,6 @@ LEAFLET_CONFIG = {
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-# Extra local settings for db
-try:
-    from local_settings import *
-except ImportError:
-    pass
-
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = "mailappvictor@gmail.com"  # my gmail username
 
@@ -160,15 +154,26 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "Victor <mailappvictor@gmail.com>"
 
 
-ADMINS = [('Justin', EMAIL_HOST_USER)]
+ADMINS = [('Victor', EMAIL_HOST_USER)]
 MANAGERS = ADMINS
 
-IS_DEPLOYED = os.getenv('IS_DEPLOYED')
-if IS_DEPLOYED:
+# Extra local settings for db
+try:
+    from local_settings import DATABASES, EMAIL_HOST_PASSWORD
+    DATABASES = DATABASES
+    EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+except ImportError:
+    #means the local_settings file is not deployed online
+    #production settings are defined here
+    DEBUG = False
     from os import environ
-    GEOS_LIBRARY_PATH = "{}/libgeos_c.so".format(environ.get('GEOS_LIBRARY_PATH'))
-    GDAL_LIBRARY_PATH = "{}/libgdal.so".format(environ.get('GDAL_LIBRARY_PATH'))
-    PROJ4_LIBRARY_PATH = "{}/libproj.so".format(environ.get('PROJ4_LIBRARY_PATH'))
+    GDAL_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgdal.so"
+    GEOS_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgeos_c.so"
+    
+    # GEOS_LIBRARY_PATH = "{}/libgeos_c.so".format(environ.get('GEOS_LIBRARY_PATH'))
+    # GDAL_LIBRARY_PATH = "{}/libgdal.so".format(environ.get('GDAL_LIBRARY_PATH'))
+    # PROJ4_LIBRARY_PATH = "{}/libproj.so".format(environ.get('PROJ4_LIBRARY_PATH'))
+    
 
     db_from_env = dj_database_url.config()
     DATABASES = {'default': dj_database_url.config()}
