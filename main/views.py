@@ -93,7 +93,7 @@ def registershamba(request):
 
 def update_payment(request):
     template = 'update-payment.html'
-    shambas = Shamba.objects.all().order_by('-parcel_no')[:10]
+    shambas = Shamba.objects.all().order_by('-parcel_no')[:20]
     context = {
         'shambas':shambas
     }
@@ -110,17 +110,20 @@ def update_payment(request):
                     shamba.balance = 100
                     shamba.save()
         elif post_type == "payment-update":
+            arrears = request.POST.get('arrears-update')
+            payment = request.POST.get('payment-update')
             shamba_id = request.POST.get('shamba-id')
-            shamba_obj = Shamba.objects.get(id=int(shamba_id))
-            payment = int(request.POST.get('payment-update'))
+            shamba_obj = Shamba.objects.get(id=int(shamba_id))   
             try:
-                value = int(shamba_obj.balance)
-                new_bal = value-payment
-                shamba_obj.balance = new_bal
-                shamba_obj.save()
-            except Exception:
-                shamba_obj.balance = -payment
-                shamba_obj.save()
+                new_bal = int(shamba_obj.balance) # db has saved int value
+            except Exception: # db has maybe none in db
+                new_bal = 0
+            if payment:
+                new_bal -= int(payment)
+            if arrears:
+                new_bal += int(arrears)
+            shamba_obj.balance = new_bal
+            shamba_obj.save()
             
     return render(request, template, context)
 
