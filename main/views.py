@@ -94,37 +94,46 @@ def registershamba(request):
 def update_payment(request):
     template = 'update-payment.html'
     shambas = Shamba.objects.all().order_by('-parcel_no')[:20]
-    context = {
-        'shambas':shambas
-    }
+    message = None
     if request.method == "POST":
         post_type = request.POST.get('post-type')
         if post_type == "yearly-update":
-            for shamba in Shamba.objects.all():
-                try:
-                    value = int(shamba.balance)
-                    new_bal = value+100
-                    shamba.balance = new_bal
-                    shamba.save()
-                except Exception:
-                    shamba.balance = 100
-                    shamba.save()
+            if request.user.is_staff:
+                for shamba in Shamba.objects.all():
+                    try:
+                        value = int(shamba.balance)
+                        new_bal = value+100
+                        shamba.balance = new_bal
+                        shamba.save()
+                    except Exception:
+                        shamba.balance = 100
+                        shamba.save()
+                message = "All records have been updated with n yearly fee of KSH.{}".format(100)
+            else:
+                message = "You need to be staff to take that action"
         elif post_type == "payment-update":
-            arrears = request.POST.get('arrears-update')
-            payment = request.POST.get('payment-update')
-            shamba_id = request.POST.get('shamba-id')
-            shamba_obj = Shamba.objects.get(id=int(shamba_id))   
-            try:
-                new_bal = int(shamba_obj.balance) # db has saved int value
-            except Exception: # db has maybe none in db
-                new_bal = 0
-            if payment:
-                new_bal -= int(payment)
-            if arrears:
-                new_bal += int(arrears)
-            shamba_obj.balance = new_bal
-            shamba_obj.save()
-            
+            if request.user.is_staff:
+                arrears = request.POST.get('arrears-update')
+                payment = request.POST.get('payment-update')
+                shamba_id = request.POST.get('shamba-id')
+                shamba_obj = Shamba.objects.get(id=int(shamba_id))   
+                try:
+                    new_bal = int(shamba_obj.balance) # db has saved int value
+                except Exception: # db has maybe none in db
+                    new_bal = 0
+                if payment:
+                    new_bal -= int(payment)
+                if arrears:
+                    new_bal += int(arrears)
+                shamba_obj.balance = new_bal
+                shamba_obj.save()
+                message = "Details for user {} has been updated.".format(shamba_obj.shamba_owner)
+            else:
+                message = "You need to be staff to take that action"
+    context = {
+        'shambas':shambas,
+        'message':message
+    }
     return render(request, template, context)
 
 def discardshamba(request):
