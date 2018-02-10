@@ -10,6 +10,15 @@ var none_layer =  L.tileLayer('', {
 	maxZoom: 18,
 	attribution: 'Empty'
 });
+var map = L.map('map', {
+    center: [-1.0500, 37.0833],
+    zoom: 10,
+    minZoom:2,
+    maxZoom:18,
+    zoomControl: false,
+    layers:[osmlayer,]
+});
+
 var county_map = L.geoJson(countydata,{
 	onEachFeature:function(feature, layer){
 		var popupContent = 'County Name: ' + feature.properties.name_2;
@@ -32,15 +41,8 @@ var county_map = L.geoJson(countydata,{
 			fillOpacity:0.7
 		}
 	}
-});
-var map = L.map('map', {
-    center: [-1.0500, 37.0833],
-    zoom: 10,
-    minZoom:2,
-    maxZoom:18,
-    zoomControl: false,
-    layers:[osmlayer,]
-});
+}).addTo(map);
+map.fitBounds(county_map.getBounds());
 //Shambas Map and Styling
 function getColor(d) {
     return d > 250	? '#ff0000' :
