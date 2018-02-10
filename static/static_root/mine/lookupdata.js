@@ -10,6 +10,15 @@ var none_layer =  L.tileLayer('', {
 	maxZoom: 18,
 	attribution: 'Empty'
 });
+var map = L.map('map', {
+    center: [-1.0500, 37.0833],
+    zoom: 10,
+    minZoom:2,
+    maxZoom:18,
+    zoomControl: false,
+    layers:[osmlayer,]
+});
+
 var county_map = L.geoJson(countydata,{
 	onEachFeature:function(feature, layer){
 		var popupContent = 'County Name: ' + feature.properties.name_2;
@@ -32,32 +41,21 @@ var county_map = L.geoJson(countydata,{
 			fillOpacity:0.7
 		}
 	}
-});
-var map = L.map('map', {
-    center: [-1.0500, 37.0833],
-    zoom: 10,
-    minZoom:2,
-    maxZoom:18,
-    zoomControl: false,
-    layers:[osmlayer,county_map,]
-});
+}).addTo(map);
+map.fitBounds(county_map.getBounds());
 //Shambas Map and Styling
 function getColor(d) {
-    return d > 10000 ? '#800026' :
-           d > 5000 ? '#BD0026' :
-           d > 2500  ? '#E31A1C' :
-           d > 2000  ? '#FC4E2A' :
-           d > 1500  ? '#FD8D3C' :
-           d > 1000   ? '#FEB24C' :
-           d > 500   ? '#FED976' :
-                      '#FFEDA0';
+    return d > 250	? '#ff0000' :
+           d > 1  	? '#6666ff' :
+           d > 'Null' ? '#00ff00' :           
+                      '#00ff00';
 }
 var shambas = L.geoJson(shambadata,{
 	onEachFeature:onEachFeature,
 	style:function(feature){
 		return {
 			fillColor:getColor(feature.properties.balance),
-			weight:1,
+			weight:0.5,
 			opacity:1,
 			color:'#000000',
 			fillOpacity:0.7
@@ -80,7 +78,7 @@ var shambas = L.geoJson(shambadata,{
 
 var constituencies_map = L.geoJson(constituenciesdata,{
 	onEachFeature:function(feature, layer) {
-		var popupContent = feature.properties.const_nam;
+		var popupContent = feature.properties.const_nam + ' Constituency';
 		if (feature.properties && feature.properties.popupContent){
 			popupContent += feature.properties.popupContent;
 		}
