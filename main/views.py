@@ -1,4 +1,4 @@
-from django.core import mail
+from django.core.mail import EmailMessage
 from django.shortcuts import render
 from .models import *
 from .forms import LandRegistrationForm
@@ -32,22 +32,31 @@ def contact(request):
             name = request.POST.get("name_of_sender")
             email_address = request.POST.get("email_address")
             message = request.POST.get("message")
+            if name and message and email_address:
+                message = """
+                Hey good people,
+                This is a message from the contact form at geohub-geoportal.herokuapp.com, beware and don't click any
+                links in the message or be cautious.
+                -----------------------------
+                contact email address: {}
 
-            mail.send_mail(
-                "Feedback on Geohub Geoportal by "+name,
-                message,
-                email_address,
-                ["mailappvictor@gmail.com", "jimmywainaina@gmail.com", "thomas.muteti@gmail.com", "njerimurage92@gmail.com", "nombumurage@gmail.com"],
-                fail_silently=False
-            )
+                {}
+                """.format(email_address, message)
+                email_message = EmailMessage(
+                    subject="Feedback on Geohub Geoportal by " + name,
+                    body=message,
+                    to=["ngenovictor321@gmail.com", "jimmywainaina@gmail.com", "thomas.muteti@gmail.com",
+                        "njerimurage92@gmail.com", "nombumurage@gmail.com"],
+                )
+                email_message.send()
 
-            helpmessage = 'Thank you for your feedback.'
-            context = {
-                'title': title,
-                'helpmessage': helpmessage,
-                'showform': showform
-            }
-            return render(request, 'contact.html', context)
+                helpmessage = 'Thank you for your feedback.'
+                context = {
+                    'title': title,
+                    'helpmessage': helpmessage,
+                    'showform': showform
+                }
+                return render(request, 'contact.html', context)
         else:
             helpmessage = 'Fill the form below'
             showform = True
@@ -116,7 +125,7 @@ def update_payment(request):
                 arrears = request.POST.get('arrears-update')
                 payment = request.POST.get('payment-update')
                 shamba_id = request.POST.get('shamba-id')
-                shamba_obj = Shamba.objects.get(id=int(shamba_id))   
+                shamba_obj = Shamba.objects.get(id=int(shamba_id))
                 try:
                     new_bal = int(shamba_obj.balance) # db has saved int value
                 except Exception: # db has maybe none in db
