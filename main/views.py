@@ -33,15 +33,10 @@ def contact(request):
             email_address = request.POST.get("email_address")
             message = request.POST.get("message")
             if name and message and email_address:
-                message = """
-                Hey good people,
-                This is a message from the contact form at geohub-geoportal.herokuapp.com, beware and don't click any
-                links in the message or be cautious.
-                -----------------------------
-                contact email address: {}
-
-                {}
-                """.format(email_address, message)
+                message = "Hey good people,\nThis is a message from the contact form at" \
+                    "geohub-geoportal.herokuapp.com, beware and don't click any links in the" \
+                    "message or be cautious.\n-----------------------------\n" \
+                    "contact email address: {}\n\n{}".format(email_address, message)
                 email_message = EmailMessage(
                     subject="Feedback on Geohub Geoportal by " + name,
                     body=message,
