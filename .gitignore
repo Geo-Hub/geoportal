@@ -5,3 +5,4 @@
 main/data/**
 geoportal/local_settings.py
 /data.sql
+venv
