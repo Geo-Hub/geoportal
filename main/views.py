@@ -31,7 +31,7 @@ def contact(request):
             showform = False
             name = request.POST.get("name_of_sender")
             email_address = request.POST.get("email_address")
-            message = request.POST.get("message")
+            message = u'' + request.POST.get("message")
             if name and message and email_address:
                 message = """
                 Hey good people,
