@@ -168,7 +168,8 @@ try:
 except ImportError:
     #means the local_settings file is not deployed online
     #production settings are defined here
-    DEBUG = False
+    # TODO: revert
+    # DEBUG = False
     from os import environ
     GDAL_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgdal.so"
     GEOS_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgeos_c.so"
