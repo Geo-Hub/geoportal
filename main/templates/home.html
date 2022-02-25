@@ -14,7 +14,7 @@
 	  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'mine/css/styles.css' %}">
-	
+
 </head>
 <body>
   <div class="navbar-wrapper">
@@ -58,15 +58,15 @@
               </button>
               <ul class="dropdown-menu">
                 {% if not request.user.is_authenticated %}
-                <li><a href="{% url 'registration_register' %}">Register</a></li>
-                <li><a href="{% url 'auth_login' %}">Log In</a></li>
-                {% endif %}                  
+                <li><a href="{% url 'django_registration_register' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Log In</a></li>
+                {% endif %}
 
                 {% if request.user.is_authenticated %}
                 <li><a href="http://127.0.0.1:8000/accounts/profile/">Profile</a></li>
-                <li><a href="{% url 'auth_password_change' %}">Change Password</a></li>
-                <li><a href="{% url 'auth_password_reset' %}">Reset Password</a></li>
-                <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                <li><a href="{% url 'password_change' %}">Change Password</a></li>
+                <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% endif %}
               </ul>
             </ul>

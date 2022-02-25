@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import OwnershipInfo, IdentifiedNew, Shamba,MonthlyWeatherByCity
+from .models import OwnershipInfo, IdentifiedNew, Shamba,MonthlyWeatherByCity
 from leaflet.admin import LeafletGeoAdmin
 
 # Register your models here.

@@ -6,3 +6,5 @@ main/data/**
 geoportal/local_settings.py
 /data.sql
 venv
+env
+set_os_envs.sh

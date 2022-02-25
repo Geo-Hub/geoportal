@@ -83,7 +83,7 @@ class Shamba(models.Model):
     zone = models.CharField(max_length=20,choices=ZONE_CHOICES,null=True)
     period_of_lease = models.IntegerField(null=True)
     land_use = models.CharField(max_length=20,choices=LAND_USE_CHOICES,null=True)
-    objects = models.GeoManager()
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.parcel_no)
@@ -102,7 +102,7 @@ class IdentifiedNew(models.Model):
     name = models.CharField(max_length=70, null=True)
     general_location = models.CharField(max_length=70,null=True)
     geom = models.MultiPolygonField(srid=4326)
-    objects = models.GeoManager()
+    objects = models.Manager()
 
 
 class KiambuCounty(models.Model):
@@ -125,7 +125,7 @@ class KiambuCounty(models.Model):
     shape_leng = models.FloatField()
     shape_area = models.FloatField()
     geom = models.PolygonField(srid=4326)
-    objects = models.GeoManager()
+    objects = models.Manager()
 
 
 class KiambuDivision(models.Model):
@@ -149,7 +149,7 @@ class KiambuDivision(models.Model):
     shape_leng = models.FloatField()
     shape_area = models.FloatField()
     geom = models.PolygonField(srid=4326)
-    objects = models.GeoManager()
+    objects = models.Manager()
 
 
 class KiambuLocation(models.Model):
@@ -173,7 +173,7 @@ class KiambuLocation(models.Model):
     shape_leng = models.FloatField()
     shape_area = models.FloatField()
     geom = models.MultiPolygonField(srid=4326)
-    objects = models.GeoManager()
+    objects = models.Manager()
 
 
 class KiambuSublocation(models.Model):
@@ -195,7 +195,7 @@ class KiambuSublocation(models.Model):
     shape_leng = models.FloatField()
     shape_area = models.FloatField()
     geom = models.PolygonField(srid=4326)
-    objects = models.GeoManager()
+    objects = models.Manager()
 
 
 class KiambuConstituencies(models.Model):
@@ -206,7 +206,7 @@ class KiambuConstituencies(models.Model):
     population = models.IntegerField()
     pop_densty = models.IntegerField()
     geom = models.MultiPolygonField(srid=4326)
-    objects = models.GeoManager()
+    objects = models.Manager()
 
 
 class MonthlyWeatherByCity(models.Model):
