@@ -2,7 +2,7 @@ appdirs==1.4.3
 dj-database-url==0.4.2
 Django==2.2.24
 django-chartit==0.2.9
-django-crispy-forms==1.14.0
+django-crispy-forms==1.13.0
 django-leaflet==0.22.0
 django-registration==3.1.2
 gunicorn==19.7.1
