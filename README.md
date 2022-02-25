@@ -26,7 +26,7 @@ See the [Geo part here](https://geohub-geoportal.herokuapp.com/data/)
     * > loaddiv.py
     * > loadloc.py
     * > loadsubloc.py
-10. Run the app _manage.py runserver_
+10. Run the app _python manage.py runserver_
 
 #### Contributors (Team GeoHub)
 
