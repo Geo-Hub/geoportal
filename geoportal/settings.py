@@ -170,13 +170,6 @@ except ImportError:
     print(os.getenv('DEBUG'))
     DEBUG = True # TODO: revert
     from os import environ
-    GDAL_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgdal.so"
-    GEOS_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgeos_c.so"
-
-    # GEOS_LIBRARY_PATH = "{}/libgeos_c.so".format(environ.get('GEOS_LIBRARY_PATH'))
-    # GDAL_LIBRARY_PATH = "{}/libgdal.so".format(environ.get('GDAL_LIBRARY_PATH'))
-    # PROJ4_LIBRARY_PATH = "{}/libproj.so".format(environ.get('PROJ4_LIBRARY_PATH'))
-
 
     db_from_env = dj_database_url.config()
     DATABASES = {'default': dj_database_url.config()}
