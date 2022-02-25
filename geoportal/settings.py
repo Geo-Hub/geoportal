@@ -168,6 +168,7 @@ try:
 except ImportError:
     #means the local_settings file is not deployed online
     #production settings are defined here
+    print(os.getenv('DEBUG'))
     DEBUG = False
     from os import environ
     GDAL_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgdal.so"
