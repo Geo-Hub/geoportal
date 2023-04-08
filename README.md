@@ -19,7 +19,7 @@ See the [Geo part here](https://geohub-geoportal.herokuapp.com/data/)
 5. Uncomment out _settings.py_ database settings to reflect a db in your postgresql dbms with postgis extension
 6. Run migrations
 7. Create superuser
-8. Copy [data folder](https://drive.google.com/open?id=0B3BfzupGx1AFNzRLUGRnanlkWk0) to main app directory
+8. Copy [data folder](https://drive.google.com/drive/folders/0B3BfzupGx1AFNzRLUGRnanlkWk0?resourcekey=0-Vd2DhaaIW67X9XXdiJy7eg&usp=sharing) to main app directory
 9. Run the following scripts in _manage.py shell_
     * > load.py
     * > loadcons.py
