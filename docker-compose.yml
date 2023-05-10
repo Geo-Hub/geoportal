@@ -1,9 +1,20 @@
 version: '3'
 
 services:
+  postgres:  # TODO: add an external data directory
+    build:
+      dockerfile: ./build/postgres/Dockerfile
+      context: .
+    environment:
+      - POSTGRES_PASSWORD=dummy_value
+      - POSTGRES_USER=geoportal
+      - POSTGRES_DB=geoportal
+    expose:
+      - 5432
+
   web:
     build:
-      dockerfile: ./build/Dockerfile
+      dockerfile: ./build/web/Dockerfile
       context: .
     ports:
       - "0.0.0.0:8002:8000"

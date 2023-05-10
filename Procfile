@@ -1,1 +1,0 @@
-web: gunicorn geoportal.wsgi --log-file -

@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,8 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    'leaflet',
-    'chartit',
     'django_registration',
     'crispy_forms',
     'main',
@@ -158,10 +155,21 @@ DEFAULT_FROM_EMAIL = "Victor <{}>".format(EMAIL_HOST_USER)
 ADMINS = [('Victor', EMAIL_HOST_USER)]
 MANAGERS = ADMINS
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": "geoportal",
+        "USER": "geoportal",
+        "PASSWORD": "dummy_value",
+        "HOST": "postgres",
+        "PORT": 5432
+    },
+}
+
 # Extra local settings for db
 try:
     from local_settings import DATABASES, EMAIL_HOST, EMAIL_HOST_PASSWORD
-    DATABASES = DATABASES
+    # DATABASES = DATABASES
     EMAIL_HOST = EMAIL_HOST
     EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 except ImportError:
@@ -171,9 +179,9 @@ except ImportError:
     DEBUG = True # TODO: revert
     from os import environ
 
-    db_from_env = dj_database_url.config()
-    DATABASES = {'default': dj_database_url.config()}
-    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+    # db_from_env = dj_database_url.config()
+    # DATABASES = {'default': dj_database_url.config()}
+    # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
     EMAIL_HOST = os.getenv('EMAIL_HOST')
     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
