@@ -16,5 +16,9 @@ services:
     build:
       dockerfile: ./build/web/Dockerfile
       context: .
+    command:
+      - "/bin/bash"
+      - "-c"
+      - "/app/entry_point.sh"
     ports:
       - "0.0.0.0:8002:8000"
