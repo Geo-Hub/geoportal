@@ -22,3 +22,6 @@ services:
       - "/app/entry_point.sh"
     ports:
       - "0.0.0.0:8002:8000"
+
+    environment:
+      - SECRET_KEY=$GEOPORTAL_SECRET_KEY
