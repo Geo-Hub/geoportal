@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'leaflet/leaflet.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'leaflet.zoomhome.css' %}">
@@ -8,11 +8,11 @@
 	height:600px;
 	width: 800px;
 }
-.leaflet-control-layers-toggle:after{ 
-    content:"Map Data Layers"; 
+.leaflet-control-layers-toggle:after{
+    content:"Map Data Layers";
     color:#000 ;
 }
-.leaflet-control-layers-toggle{ 
+.leaflet-control-layers-toggle{
     width:auto;
     background-position:3px 50% ;
     padding:3px;
@@ -59,4 +59,3 @@ function onEachFeature(feature, layer) {
 <script type="text/javascript" src="{% static 'leaflet.zoomhome.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'mine/lookupdata.js' %}"></script>
 {% endblock content %}
-
