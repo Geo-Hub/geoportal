@@ -2,8 +2,8 @@
 *.pyc
 
 #the data folder
-main/data/**
-geoportal/local_settings.py
+web/main/data/**
+web/geoportal/local_settings.py
 /data.sql
 venv
 env
