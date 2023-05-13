@@ -24,4 +24,4 @@ services:
       - "0.0.0.0:8002:8000"
 
     environment:
-      - SECRET_KEY=$GEOPORTAL_SECRET_KEY
+      - SECRET_KEY=$DJANGO_SECRET_KEY
