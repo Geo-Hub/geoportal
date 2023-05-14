@@ -10,23 +10,18 @@ The app is up at [https://geohub-geoportal.herokuapp.com](https://geohub-geoport
 
 See the [Geo part here](https://geohub-geoportal.herokuapp.com/data/)
 
+##### Pre requisites
+1. Docker installation. Install from https://docs.docker.com/engine/install/
 ##### _Setup Instructions_
-
-1. Create a python 2.7 virtual environment
-2. Activate the virtual environment
-3. Access project directory  **geoportal**
-4. Install modules from **requirements.txt**
-5. Uncomment out _settings.py_ database settings to reflect a db in your postgresql dbms with postgis extension
-6. Run migrations
-7. Create superuser
-8. Copy [data folder](https://drive.google.com/drive/folders/0B3BfzupGx1AFNzRLUGRnanlkWk0?resourcekey=0-Vd2DhaaIW67X9XXdiJy7eg&usp=sharing) to main app directory
-9. Run the following scripts in _manage.py shell_
-    * > load.py
-    * > loadcons.py
-    * > loaddiv.py
-    * > loadloc.py
-    * > loadsubloc.py
-10. Run the app _python manage.py runserver_
+These assume unix commands ie Ubuntu/Mac. For windows users, might need to substitute with relevant commands.
+These are run in the terminal.
+1. cd into your projects directory.
+2. Clone this repo `git clone https://github.com/Geo-Hub/geoportal.git`
+3. cd into the newly created folder `cd geoportal`
+4. Copy `.env.sample` file into `.env` with `cp .env.sample .env`
+5. Update the values in the `.env` to your liking. 
+6. Run `docker compose up --build`
+7. Load the webserver from [http://localhost:8002](http://localhost:8002)
 
 #### Contributors (Team GeoHub)
 
