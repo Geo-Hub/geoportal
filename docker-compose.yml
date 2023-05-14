@@ -9,6 +9,8 @@ services:
       - POSTGRES_PASSWORD=dummy_value
       - POSTGRES_USER=geoportal
       - POSTGRES_DB=geoportal
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
     expose:
       - 5432
 
@@ -27,3 +29,11 @@ services:
 
     environment:
       - SECRET_KEY=$DJANGO_SECRET_KEY
+      - PGHOST=postgres
+      - PGPORT=5432
+      - PGDATABASE=geoportal
+      - PGUSER=geoportal
+      - PGPASSWORD=dummy_value
+      - DEBUG=False
+      - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
+      - EMAIL_HOST=$EMAIL_HOST
