@@ -9,3 +9,4 @@ venv
 env
 set_os_envs.sh
 .idea
+db_data
