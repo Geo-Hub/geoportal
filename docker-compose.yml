@@ -16,6 +16,8 @@ services:
     build:
       dockerfile: ./build/web/Dockerfile
       context: .
+    depends_on:
+      - postgres
     command:
       - "/bin/bash"
       - "-c"
