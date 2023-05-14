@@ -6,9 +6,9 @@
 
 #### _Won most popular award_
 
-The app is up at [https://geohub-geoportal.herokuapp.com](https://geohub-geoportal.herokuapp.com)
+The app is up at [https://geoportal.victorngeno.com](https://geoportal.victorngeno.com)
 
-See the [Geo part here](https://geohub-geoportal.herokuapp.com/data/)
+See the [Geo part here](https://geoportal.victorngeno.com/data/)
 
 ##### Pre requisites
 1. Docker installation. Install from https://docs.docker.com/engine/install/
