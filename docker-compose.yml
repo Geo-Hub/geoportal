@@ -5,10 +5,6 @@ services:
     build:
       dockerfile: ./build/postgres/Dockerfile
       context: .
-    environment:
-      - POSTGRES_PASSWORD=dummy_value
-      - POSTGRES_USER=geoportal
-      - POSTGRES_DB=geoportal
     volumes:
       - ./db_data:/var/lib/postgresql/data
     expose:
@@ -26,14 +22,3 @@ services:
       - "/app/entry_point.sh"
     ports:
       - "0.0.0.0:8002:8000"
-
-    environment:
-      - SECRET_KEY=$DJANGO_SECRET_KEY
-      - PGHOST=postgres
-      - PGPORT=5432
-      - PGDATABASE=geoportal
-      - PGUSER=geoportal
-      - PGPASSWORD=dummy_value
-      - DEBUG=False
-      - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
-      - EMAIL_HOST=$EMAIL_HOST
