@@ -21,9 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-ALLOWED_HOSTS = ['geohub-geoportal.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['localhost', 'geoportal.victorngeno.com']
 
-SITE_URL = "http://localhost:8000"
+SITE_URL = "http://localhost:8002"
 # Application definition
 
 INSTALLED_APPS = (
