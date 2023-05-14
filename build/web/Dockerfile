@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY web .
 
-RUN apt update
-RUN apt install python3-pip -y
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py
 RUN pip3 install -r requirements.txt
 
 COPY build/web/entry_point.sh /app/entry_point.sh
