@@ -1,6 +1,18 @@
 #!/bin/bash
 
 set -e
+# ensure the postgress server is running.
+echo "Checking status for postgres server."
+db_connection_test=1
+while [ $db_connection_test -eq 1 ]
+do
+    set +e
+    python db_connection_test.py
+    db_connection_test=$?
+    set -e
+    echo test result: $db_connection_test
+    sleep 1
+done
 
 echo "${0}: running migrations."
 python manage.py makemigrations --merge
