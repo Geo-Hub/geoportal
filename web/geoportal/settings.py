@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-ALLOWED_HOSTS = ['localhost', 'geoportal.victorngeno.com']
+ALLOWED_HOSTS = ['localhost', 'victorngeno.com', 'geoportal.victorngeno.com']
 
 SITE_URL = "http://localhost:8002"
 # Application definition
