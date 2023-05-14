@@ -8,3 +8,4 @@ web/geoportal/local_settings.py
 venv
 env
 set_os_envs.sh
+.idea
