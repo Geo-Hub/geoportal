@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block content %}
 <p1>Parcel Items</p1>
@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for item in data %}  
+      {% for item in data %}
       <tr>
         <td>{{item.id}}</td>
         <td>{{item.balance}}</td>

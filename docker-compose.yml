@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  postgres:
+    build:
+      dockerfile: ./build/postgres/Dockerfile
+      context: .
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_DB=${PGDATABASE}
+    expose:
+      - 5432
+
+  web:
+    build:
+      dockerfile: ./build/web/Dockerfile
+      context: .
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    environment:
+      - PGHOST=${PGHOST}
+      - PGPORT=${PGPORT}
+      - PGDATABASE=${PGDATABASE}
+      - PGUSER=${PGUSER}
+      - PGPASSWORD=${PGPASSWORD}
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - EMAIL_HOST=${EMAIL_HOST}
+    command:
+      - "/bin/bash"
+      - "-c"
+      - "/app/entry_point.sh"
+    ports:
+      - "0.0.0.0:8002:8000"

@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,14 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.environ.get('SECRET_KEY', '4ct$ragx!jn!@09061+#0lx+rgu&jyj@b6ev!i+edh2ef-f#at')
+ALLOWED_HOSTS = ['localhost', '139.162.243.214', 'victorngeno.com', 'geoportal.victorngeno.com']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['geohub-geoportal.herokuapp.com', 'localhost']
-
-SITE_URL = "http://localhost:8000"
+SITE_URL = "http://localhost:8002"
 # Application definition
 
 INSTALLED_APPS = (
@@ -40,8 +34,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    'leaflet',
-    'chartit',
     'django_registration',
     'crispy_forms',
     'main',
@@ -79,25 +71,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'geoportal.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'dbname',
-#         'USER':'user',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT':'5432',
-#     }
-# }
-
-
-
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -158,22 +131,19 @@ DEFAULT_FROM_EMAIL = "Victor <{}>".format(EMAIL_HOST_USER)
 ADMINS = [('Victor', EMAIL_HOST_USER)]
 MANAGERS = ADMINS
 
-# Extra local settings for db
-try:
-    from local_settings import DATABASES, EMAIL_HOST, EMAIL_HOST_PASSWORD
-    DATABASES = DATABASES
-    EMAIL_HOST = EMAIL_HOST
-    EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-except ImportError:
-    #means the local_settings file is not deployed online
-    #production settings are defined here
-    print(os.getenv('DEBUG'))
-    DEBUG = True # TODO: revert
-    from os import environ
+DATABASES = {
+    "default": {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": os.getenv('PGDATABASE'),
+        "USER": os.getenv('PGUSER'),
+        "PASSWORD": os.getenv('PGPASSWORD'),
+        "HOST": os.getenv('PGHOST'),
+        "PORT": os.getenv('PGPORT'),
+    },
+}
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-    db_from_env = dj_database_url.config()
-    DATABASES = {'default': dj_database_url.config()}
-    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-
-    EMAIL_HOST = os.getenv('EMAIL_HOST')
-    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('DEBUG', False)

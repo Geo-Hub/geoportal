@@ -5,6 +5,7 @@ from django.conf import settings
 
 
 class Registration(models.Model):
+    id = models.AutoField(primary_key=True)
     submitted_from = models.CharField(max_length=50,null=False)
     parcel_no = models.CharField(max_length=20,null=False)
     date_submitted = models.DateTimeField(auto_now_add=True,null=False)
@@ -14,6 +15,7 @@ class Registration(models.Model):
 
 
 class ContactMessage(models.Model):
+    id = models.AutoField(primary_key=True)
     name_of_sender = models.CharField(max_length=50,null=False)
     email_address = models.EmailField(max_length=254,null=False)
     message = models.TextField(max_length=200,null=False)
@@ -25,6 +27,7 @@ class OwnershipInfoManager(models.Manager):
 
 
 class OwnershipInfo(models.Model):
+    id = models.AutoField(primary_key=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50, null=True)
     id_number = models.IntegerField()
@@ -34,10 +37,12 @@ class OwnershipInfo(models.Model):
 
 
 class RatesPayable(models.Model):
+    id = models.AutoField(primary_key=True)
     pass
 
 
 class PaymentInfo(models.Model):
+    id = models.AutoField(primary_key=True)
     amount = models.IntegerField()
     receipt_number = models.IntegerField()
     date_of_payment = models.DateField()
@@ -59,6 +64,7 @@ class Shamba(models.Model):
         ('Agricultural','Agricultural'),
         ('Bare_Land','Bare_Land'),
     )
+    id = models.AutoField(primary_key=True)
     shamba_owner = models.ForeignKey(OwnershipInfo, on_delete=models.CASCADE,null=True)
     balance = models.IntegerField(null=True)
     objectid_1 = models.IntegerField()
@@ -72,9 +78,9 @@ class Shamba(models.Model):
     soil_type = models.CharField(max_length=254)
     state = models.CharField(max_length=254)
     cost_value = models.IntegerField()
-    pic_url = models.CharField(max_length=254)
-    electricit = models.CharField(max_length=254)
-    water = models.CharField(max_length=254)
+    pic_url = models.CharField(max_length=254, null=True)
+    electricit = models.CharField(max_length=254, null=True)
+    water = models.CharField(max_length=254, null=True)
     outlinetra = models.FloatField()
     shape_le_1 = models.FloatField()
     shape_area = models.FloatField()
@@ -88,7 +94,9 @@ class Shamba(models.Model):
     def __str__(self):
         return str(self.parcel_no)
 
+
 class LandOwner(models.Model):
+    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=200)
     second_name = models.CharField(max_length=200)
     surname = models.CharField(max_length=200)
@@ -96,9 +104,8 @@ class LandOwner(models.Model):
     land = models.ForeignKey(Shamba, on_delete=models.CASCADE)
 
 
-
-
 class IdentifiedNew(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=70, null=True)
     general_location = models.CharField(max_length=70,null=True)
     geom = models.MultiPolygonField(srid=4326)
@@ -106,22 +113,18 @@ class IdentifiedNew(models.Model):
 
 
 class KiambuCounty(models.Model):
-    id_0 = models.IntegerField()
+    id_0 = models.IntegerField(primary_key=True)
     iso = models.CharField(max_length=254)
     name_0 = models.CharField(max_length=254)
     id_1 = models.IntegerField()
     name_1 = models.CharField(max_length=254)
     id_2 = models.IntegerField()
     name_2 = models.CharField(max_length=254)
-    varname_2 = models.CharField(max_length=254)
-    nl_name_2 = models.CharField(max_length=254)
     hasc_2 = models.CharField(max_length=254)
-    cc_2 = models.CharField(max_length=254)
     type_2 = models.CharField(max_length=254)
     engtype_2 = models.CharField(max_length=254)
     validfr_2 = models.CharField(max_length=254)
     validto_2 = models.CharField(max_length=254)
-    remarks_2 = models.CharField(max_length=254)
     shape_leng = models.FloatField()
     shape_area = models.FloatField()
     geom = models.PolygonField(srid=4326)
@@ -129,7 +132,7 @@ class KiambuCounty(models.Model):
 
 
 class KiambuDivision(models.Model):
-    id_0 = models.IntegerField()
+    id_0 = models.IntegerField(primary_key=True)
     iso = models.CharField(max_length=254)
     name_0 = models.CharField(max_length=254)
     id_1 = models.IntegerField()
@@ -153,7 +156,7 @@ class KiambuDivision(models.Model):
 
 
 class KiambuLocation(models.Model):
-    id_0 = models.IntegerField()
+    id_0 = models.IntegerField(primary_key=True)
     iso = models.CharField(max_length=254)
     name_0 = models.CharField(max_length=254)
     id_1 = models.IntegerField()
@@ -177,7 +180,7 @@ class KiambuLocation(models.Model):
 
 
 class KiambuSublocation(models.Model):
-    id_0 = models.IntegerField()
+    id_0 = models.IntegerField(primary_key=True)
     iso = models.CharField(max_length=254)
     name_0 = models.CharField(max_length=254)
     id_1 = models.IntegerField()
@@ -199,17 +202,18 @@ class KiambuSublocation(models.Model):
 
 
 class KiambuConstituencies(models.Model):
-    objectid = models.IntegerField()
+    objectid = models.IntegerField(primary_key=True)
     const_nam = models.CharField(max_length=50)
     shape_leng = models.FloatField()
     shape_area = models.FloatField()
-    population = models.IntegerField()
-    pop_densty = models.IntegerField()
+    population = models.IntegerField(null=True)
+    pop_densty = models.IntegerField(null=True)
     geom = models.MultiPolygonField(srid=4326)
     objects = models.Manager()
 
 
 class MonthlyWeatherByCity(models.Model):
+    id = models.AutoField(primary_key=True)
     month = models.IntegerField()
     boston_temp = models.DecimalField(max_digits=5, decimal_places=1)
     houston_temp = models.DecimalField(max_digits=5, decimal_places=1)

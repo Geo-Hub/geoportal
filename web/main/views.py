@@ -4,7 +4,6 @@ from .models import *
 from .forms import LandRegistrationForm
 from django.http import HttpResponseRedirect
 from django.core.serializers import serialize
-from chartit import DataPool, Chart
 
 
 # Create your views here.
