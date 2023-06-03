@@ -28,8 +28,4 @@ echo "Loading GIS data into the DB."
 python manage.py load_gis_data
 
 echo "Starting webserver"
-gunicorn --bind 0.0.0.0:8000 geoportal.wsgi \
-      --timeout 600 \
-      --workers 4 \
-      --log-level=debug \
-      --reload
+gunicorn --bind 0.0.0.0:8000 geoportal.wsgi
