@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', False) == "True"
 
 ALLOWED_HOSTS = ['139.162.243.214', 'victorngeno.com', 'geoportal.victorngeno.com']
 if DEBUG is True:
