@@ -33,5 +33,11 @@ services:
     ports:
       - "0.0.0.0:8002:8000"
 
+    develop:
+      watch:
+        - path: web/
+          action: sync # the code will be rebuilt by django StatReloader
+          target: /app/
+
 volumes:
   db_data:
