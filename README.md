@@ -8,6 +8,8 @@
    information can be accessible to the public while others by admins only.
 4. Demonstrate GIS can be used to assess quality and attributes of land before purchasing.
 
+_To demo different access levels admin can log in and out and not that the names of land owners toggles visibility_
+
 ### _Presented at the 2015 Jkuat Tech Expo_
 
 #### _Won most popular award_
