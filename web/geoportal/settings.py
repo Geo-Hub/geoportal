@@ -21,7 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-ALLOWED_HOSTS = ['localhost', '139.162.243.214', 'victorngeno.com', 'geoportal.victorngeno.com']
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('DEBUG', False)
+
+ALLOWED_HOSTS = ['139.162.243.214', 'victorngeno.com', 'geoportal.victorngeno.com']
+if DEBUG is True:
+    ALLOWED_HOSTS.append("localhost")
 
 SITE_URL = "http://localhost:8002"
 # Application definition
@@ -144,6 +149,3 @@ DATABASES = {
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
