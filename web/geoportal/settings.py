@@ -28,6 +28,8 @@ ALLOWED_HOSTS = ['139.162.243.214', 'victorngeno.com', 'geoportal.victorngeno.co
 if DEBUG is True:
     ALLOWED_HOSTS.append("localhost")
 
+CSRF_TRUSTED_ORIGINS = ['https://geoportal.victorngeno.com']
+
 SITE_URL = "http://localhost:8002"
 # Application definition
 
