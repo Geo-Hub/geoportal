@@ -9,7 +9,7 @@ RUN apk add --no-cache python3 py3-pip py3-virtualenv python3-dev libpq bash geo
 RUN python3 -m venv venv
 
 COPY web/build/requirements.txt requirements.txt
-RUN venv/bin/python -m pip install -r requirements.txt
+RUN venv/bin/python -m pip install --no-cache-dir -r requirements.txt
 
 COPY web/build/db_connection_test.py .
 COPY web/build/entry_point.sh .
