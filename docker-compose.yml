@@ -3,7 +3,7 @@ services:
     image: postgis/postgis:16-3.4-alpine
     restart: always
     volumes:
-      - ./db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     env_file:
       - .env
     environment:
@@ -34,3 +34,6 @@ services:
       - EMAIL_HOST=${EMAIL_HOST}
     ports:
       - "0.0.0.0:8002:8000"
+
+volumes:
+  db_data:
