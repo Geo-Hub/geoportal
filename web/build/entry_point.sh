@@ -29,7 +29,7 @@ echo "${0}: running migrations."
 venv/bin/python manage.py makemigrations --merge --noinput --check
 venv/bin/python manage.py migrate --noinput
 
-echo "${0}: collecting statics."
+echo "${0}: collecting statics files."
 
 venv/bin/python manage.py collectstatic --noinput
 
