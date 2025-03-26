@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,9 +19,9 @@
 
     <!-- Custom styles for this template -->
     <style type="text/css">
-    body {
-      padding-top: 70px;
-    }
+      body {
+        padding-top: 70px;
+      }
     </style>
   </head>
 
@@ -29,7 +30,8 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -39,34 +41,37 @@
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
-                 <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav">
             {% url 'about' as about %}{% url 'contact' as contact %}
             <li><a href="{% url 'home' %}">Home</a></li>
-            <li {% if request.path == about %} class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
-            <li {% if request.path == contact %} class="active"{% endif %}><a href="{% url 'contact' %}">Contact</a></li>
+            <li {% if request.path == about %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
+            <li {% if request.path == contact %} class="active" {% endif %}><a href="{% url 'contact' %}">Contact</a>
+            </li>
             {% if request.user.is_superuser %}
             <li><a href="/admin">Admin</a></li>
             {% endif %}
-             <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">Services <span class="caret"></span></a>
+              <ul class="dropdown-menu">
 
-                    <li><a href="{% url 'registershamba' %}">Register Land</a></li>
-                    <li><a href="{% url 'payment' %}">Update Payment</a></li>
-                    <li><a href="{% url 'changeowner' %}">Change Ownership</a></li>
-                    <li><a href="{% url 'discardshamba' %}">Discard Ownership</a></li>
-                    <li><a href="{% url 'data' %}">Data</a></li>
-                    <li><a href="{% url 'statistics' %}">Statistics</a></li>
-                  </ul>
-                </li>
+                <li><a href="{% url 'registershamba' %}">Register Land</a></li>
+                <li><a href="{% url 'payment' %}">Update Payment</a></li>
+                <li><a href="{% url 'changeowner' %}">Change Ownership</a></li>
+                <li><a href="{% url 'discardshamba' %}">Discard Ownership</a></li>
+                <li><a href="{% url 'data' %}">Data</a></li>
+                <li><a href="{% url 'statistics' %}">Statistics</a></li>
+              </ul>
+            </li>
 
           </ul>
           <ul style='padding-right:10px;' class="nav navbar-nav navbar-right">
             <div class="btn-group">
-              <button type="button" class="btn navbar-btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.user }}<span class="caret"></span>
+              <button type="button" class="btn navbar-btn btn-success dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">{{ request.user }}<span class="caret"></span>
               </button>
 
-            <!-- <li class="dropdown">
+              <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ request.user }}<span class="caret"></span></a> -->
               <ul class="dropdown-menu">
                 {% if not request.user.is_authenticated %}
@@ -75,70 +80,75 @@
                 {% endif %}
 
                 {% if request.user.is_authenticated %}
-                <li><a href="http://127.0.0.1:8000/accounts/profile/">Profile</a></li>
                 <li><a href="{% url 'password_change' %}">Change Password</a></li>
                 <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                </li>
+                <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                  {% csrf_token %}
+                  <input type="hidden" name="next" value="{{ request.path }}">
+                </form>
                 {% endif %}
               </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+            </div><!--/.nav-collapse -->
+        </div>
     </nav>
     <div class="container-fluid">
-        <div class="row">
-            {% block services %}
-                <div class="col-md-3 sidebar-offcanvas" id="sidebar">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Services</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% if request.user.is_staff %}
-                        <tr>
-                          <td><a href="{% url 'registershamba' %}">Register Land</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="{% url 'payment' %}">Update Payment</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="{% url 'discardshamba' %}">Discard Ownership</a></td>
-                        </tr>
-                      {% endif %}
-                      <tr>
-                        <td><a href="{% url 'data' %}">Data</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="{% url 'statistics' %}">Statistics</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div>
-                    {% block colours %}
-                    {% endblock colours %}
-                  </div>
-                </div>
-            {% endblock services %}
-
-
-            <div class="container col-md-8">
-                {% block content %}
-                <!-- preceding columns -->
-                {% endblock content %}
-
-            </div>
+      <div class="row">
+        {% block services %}
+        <div class="col-md-3 sidebar-offcanvas" id="sidebar">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Services</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if request.user.is_staff %}
+              <tr>
+                <td><a href="{% url 'registershamba' %}">Register Land</a></td>
+              </tr>
+              <tr>
+                <td><a href="{% url 'payment' %}">Update Payment</a></td>
+              </tr>
+              <tr>
+                <td><a href="{% url 'changeowner' %}">Change Ownership</a></td>
+              </tr>
+              <tr>
+                <td><a href="{% url 'discardshamba' %}">Discard Ownership</a></td>
+              </tr>
+              {% endif %}
+              <tr>
+                <td><a href="{% url 'data' %}">Data</a></td>
+              </tr>
+              <tr>
+                <td><a href="{% url 'statistics' %}">Statistics</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            {% block colours %}
+            {% endblock colours %}
+          </div>
         </div>
+        {% endblock services %}
 
 
-    <!-- Bootstrap core JavaScript
+        <div class="container col-md-8">
+          {% block content %}
+          <!-- preceding columns -->
+          {% endblock content %}
+
+        </div>
+      </div>
+
+
+      <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-  <script type="text/javascript" src="{% static 'jquery-1.11.3.js' %}"></script>
-  <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script type="text/javascript" src="{% static 'jquery-1.11.3.js' %}"></script>
+      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
 
   </body>
+
 </html>
