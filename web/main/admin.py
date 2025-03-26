@@ -13,6 +13,11 @@ from .models import (
 )
 
 
+@admin.register(KiambuCounty)
+class KiambuCountyAdmin(admin.ModelAdmin):
+    list_display = ("name_2", "id_0")
+
+
 @admin.register(Shamba)
 class ShambaAdmin(admin.ModelAdmin):
     list_display = (
