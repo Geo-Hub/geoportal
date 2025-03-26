@@ -1,5 +1,7 @@
 from typing import Any, Optional
-from django.core.management.base import BaseCommand, CommandError, CommandParser
+
+from django.core.management.base import BaseCommand
+from main.models import KiambuCounty, KiambuDivision, Shamba
 
 
 class Command(BaseCommand):
@@ -7,10 +9,20 @@ class Command(BaseCommand):
 
     def handle(self, *args: Any, **options: Any):
         from main.management.load_scripts import (
-            load_county,
             load_constituencies,
-            load_shambas
+            load_county,
+            load_shambas,
         )
-        load_county.run()
-        load_constituencies.run()
-        load_shambas.run()
+
+        if KiambuCounty.objects.count() == 0:
+            load_county.run()
+        else:
+            print("Kiambu County already exists. Skipping...")
+        if KiambuDivision.objects.count() == 0:
+            load_constituencies.run()
+        else:
+            print("Kiambu Division already exists. Skipping...")
+        if Shamba.objects.count() == 0:
+            load_shambas.run()
+        else:
+            print("Shamba already exists. Skipping...")
