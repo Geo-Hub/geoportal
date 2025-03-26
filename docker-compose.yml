@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgis/postgis:16-3.4-alpine
+    restart: always
     volumes:
       - ./db_data:/var/lib/postgresql/data
     env_file:
