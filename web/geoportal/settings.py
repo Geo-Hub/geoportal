@@ -139,13 +139,13 @@ MANAGERS = ADMINS
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": os.getenv('PGDATABASE'),
-        "USER": os.getenv('PGUSER'),
-        "PASSWORD": os.getenv('PGPASSWORD'),
-        "HOST": os.getenv('PGHOST'),
-        "PORT": os.getenv('PGPORT'),
+        "NAME": os.environ["PGDATABASE"],
+        "USER": os.environ["PGUSER"],
+        "PASSWORD": os.environ["PGPASSWORD"],
+        "HOST": os.environ["PGHOST"],
+        "PORT": os.environ["PGPORT"],
     },
 }
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ["SECRET_KEY"]
