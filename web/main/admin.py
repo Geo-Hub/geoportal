@@ -1,17 +1,54 @@
-from django.contrib import admin
-from .models import OwnershipInfo, IdentifiedNew, Shamba,MonthlyWeatherByCity
-from leaflet.admin import LeafletGeoAdmin
+from django.contrib.gis import admin
 
-# Register your models here.
+from .models import (
+    IdentifiedNew,
+    KiambuConstituencies,
+    KiambuCounty,
+    KiambuDivision,
+    KiambuLocation,
+    KiambuSublocation,
+    MonthlyWeatherByCity,
+    OwnershipInfo,
+    Shamba,
+)
+
+
+@admin.register(Shamba)
 class ShambaAdmin(admin.ModelAdmin):
-	fields = ('balance','objectid_1','objectid','shape_leng','perimeter','parcel_no','shamba_owner','soil_type','state','cost_value','pic_url','electricit','water','outlinetra',
-		'shape_le_1','shape_area','geom')
-	list_display = ['balance','objectid_1','objectid','shape_leng','perimeter','parcel_no','shamba_owner','soil_type','state','cost_value','pic_url','electricit','water']
-	class Meta:
-		ordering = ('balance',)
+    list_display = (
+        "parcel_no",
+        "shamba_owner",
+        "balance",
+        "soil_type",
+        "state",
+        "cost_value",
+        "electricit",
+        "water",
+    )
+    ordering = ("-balance",)
+    list_filter = ("parcel_no",)
+
+
+@admin.register(KiambuConstituencies)
+class KiambuConstituenciesAdmin(admin.ModelAdmin):
+    list_display = ("const_nam", "population", "pop_densty")
+
+
+@admin.register(KiambuDivision)
+class KiambuDivisionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(KiambuLocation)
+class KiambuLocationAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(KiambuSublocation)
+class KiambuSublocationAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(OwnershipInfo)
-admin.site.register(IdentifiedNew,LeafletGeoAdmin)
-admin.site.register(Shamba,ShambaAdmin)
+admin.site.register(IdentifiedNew)
 admin.site.register(MonthlyWeatherByCity)
