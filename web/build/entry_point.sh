@@ -41,4 +41,8 @@ rm -rf /app/main/management/load_scripts/data
 rm data.zip
 
 echo "Starting webserver"
-venv/bin/python -m gunicorn --bind 0.0.0.0:8000 geoportal.wsgi
+if [ "$DEBUG" == "True" ]; then
+    venv/bin/python manage.py runserver 0.0.0.0:8000
+else
+    venv/bin/python -m gunicorn --bind 0.0.0.0:8000 geoportal.wsgi
+fi
