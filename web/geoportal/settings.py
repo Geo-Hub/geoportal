@@ -110,8 +110,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static","media_root")
 
 # Django registration module settings
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
-REGISTRATION_AUTO_LOGIN = True # Automatically log the user in when they click the activation link
+# ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+# REGISTRATION_AUTO_LOGIN = True # Automatically log the user in when they click the activation link
+REGISTRATION_OPEN = False
 
 SITE_ID=1
 
