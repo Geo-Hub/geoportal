@@ -2,6 +2,12 @@
 
 ## The GeoHub Team
 
+### Objectives
+1. Demonstrate a land information systems
+2. Demonstrate different access levels for land information. This ensures subsets of
+   information can be accessible to the public while others by admins only.
+4. Demonstrate GIS can be used to assess quality and attributes of land before purchasing.
+
 ### _Presented at the 2015 Jkuat Tech Expo_
 
 #### _Won most popular award_
@@ -19,7 +25,7 @@ These are run in the terminal.
 2. Clone this repo `git clone https://github.com/Geo-Hub/geoportal.git`
 3. cd into the newly created folder `cd geoportal`
 4. Copy `.env.sample` file into `.env` with `cp .env.sample .env`
-5. Update the values in the `.env` to your liking. 
+5. Update the values in the `.env` to your liking.
 6. Run `docker compose up --build`
 7. Load the webserver from [http://localhost:8002](http://localhost:8002)
 
