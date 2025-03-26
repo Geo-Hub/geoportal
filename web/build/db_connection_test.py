@@ -1,9 +1,9 @@
-import psycopg2
+import psycopg
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
-        conn = psycopg2.connect()
+        conn = psycopg.connect()
         print("Successful connection.")
-    except psycopg2.OperationalError:
+    except psycopg.OperationalError:
         print("Connection failed.")
         exit(1)
