@@ -27,7 +27,7 @@ These are run in the terminal.
 2. Clone this repo `git clone https://github.com/Geo-Hub/geoportal.git`
 3. cd into the newly created folder `cd geoportal`
 4. Copy `.env.sample` file into `.env` with `cp .env.sample .env`
-5. Update the values in the `.env` to your liking.
+5. Update the values in the `.env` to your specifics.
 6. Run `docker compose up --build`
 7. Load the webserver from [http://localhost:8002](http://localhost:8002)
 
