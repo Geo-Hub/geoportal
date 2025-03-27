@@ -98,8 +98,18 @@ window.onload = function () {
       }
       layer.bindPopup(popupContent);
       layer.on({
+        remove: function (e) {
+          selectedItem.innerHTML = originalContent;
+        },
         click: function (e) {
           map.fitBounds(e.target.getBounds(), { padding: [100, 100] });
+          selectedItem.innerHTML = `
+          <h2>Shamba</h2>
+          <h3>Owner: ${feature.properties.owner}</h3>
+          <h3>Balance: ${feature.properties.balance}</h3>
+          <h3>Zone: ${feature.properties.zone}</h3>
+          <h3>Type Of Lease: ${feature.properties.type_of_lease}</h3>
+          `;
         },
       });
     },
