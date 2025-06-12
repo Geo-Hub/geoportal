@@ -218,7 +218,7 @@ window.onload = function () {
           weight: 10,
         },
         {
-          label: "Bal = Unknown",
+          label: "No Balance",
           type: "rectangle",
           color: colors.Null,
           fillColor: colors.Null,
