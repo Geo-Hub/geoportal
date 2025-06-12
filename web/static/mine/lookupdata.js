@@ -58,14 +58,20 @@ window.onload = function () {
   });
   // map.fitBounds(county_map.getBounds());
   //Shambas Map and Styling
+  const colors = {
+    gte250: "#ff0000",
+    gte1: "#6666ff",
+    Null: "#00ff00",
+    default: "#00ff00",
+  };
   function getColor(d) {
     return d > 250
-      ? "#ff0000"
+      ? colors.gte250
       : d > 1
-      ? "#6666ff"
+      ? colors.gte1
       : d > "Null"
-      ? "#00ff00"
-      : "#00ff00";
+      ? colors.Null
+      : colors.default;
   }
   var addingLayers = false;
 
@@ -180,4 +186,44 @@ window.onload = function () {
     homeCoordinates: [-1.05, 37.0833],
     homeZoom: 10,
   }).addTo(map);
+
+  L.control
+    .Legend({
+      position: "bottomleft",
+      title: "Shamba Balance",
+      symbolWidth: 10,
+      legends: [
+        {
+          label: "Bal > 250",
+          type: "rectangle",
+          color: colors.gte250,
+          fillColor: colors.gte250,
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.7,
+          weight: 10,
+        },
+        {
+          label: "Bal < 250",
+          type: "rectangle",
+          color: colors.gte1,
+          fillColor: colors.gte1,
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.7,
+          weight: 10,
+        },
+        {
+          label: "Bal = Unknown",
+          type: "rectangle",
+          color: colors.Null,
+          fillColor: colors.Null,
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.7,
+          weight: 10,
+        },
+      ],
+    })
+    .addTo(map);
 };

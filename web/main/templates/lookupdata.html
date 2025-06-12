@@ -3,6 +3,7 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'leaflet/leaflet.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'leaflet.zoomhome.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'leaflet.legend.css' %}">
 <style>
   .map-container {
     display: flex;
@@ -39,6 +40,13 @@
     line-height: 36px;
 
   }
+
+  .leaflet-legend-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
 </style>
 <div class="map-container">
   <div id="map" class="map-content"></div>
@@ -54,5 +62,6 @@
 </script>
 <script type="text/javascript" src="{% static 'leaflet/leaflet.js' %}"></script>
 <script type="text/javascript" src="{% static 'leaflet.zoomhome.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'leaflet.legend.js' %}"></script>
 <script type="text/javascript" src="{% static 'mine/lookupdata.js' %}"></script>
 {% endblock content %}
