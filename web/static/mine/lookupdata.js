@@ -180,7 +180,11 @@ window.onload = function () {
     "Osm Layer": osmlayer,
     None: none_layer,
   };
-  L.control.layers(baseLayers, overlays).addTo(map);
+  L.control
+    .layers(baseLayers, overlays, {
+      collapsed: false,
+    })
+    .addTo(map);
   var zoomHome = L.Control.zoomHome({
     position: "topleft",
     homeCoordinates: [-1.05, 37.0833],
