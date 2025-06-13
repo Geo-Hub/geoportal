@@ -77,27 +77,29 @@ window.onload = function () {
 
   var shambas = L.geoJson(shambadata, {
     onEachFeature: function (feature, layer) {
-      var name = feature.properties.owner;
-      var htmlName = "";
-      if (name) {
-        htmlName = "Name: " + name + "<br>";
-      }
-      var popupContent =
+      var popupContent = "";
+      popupContent +=
         "Balance " + feature.properties.balance
           ? feature.properties.balance.toLocaleString()
-          : "N/A" + "<br>" + htmlName + "Zone: " + feature.properties.zone
+          : "N/A" + "<br>";
+      popupContent +=
+        "Name " + feature.properties.owner
+          ? feature.properties.owner
+          : "N/A" + "<br>";
+      popupContent +=
+        "Zone " + feature.properties.zone
           ? feature.properties.zone
-          : "N/A" +
-            "<br>" +
-            "Type Of Lease: " +
-            feature.properties.type_of_lease
+          : "N/A" + "<br>";
+      popupContent +=
+        "Type Of Lease " + feature.properties.type_of_lease
           ? feature.properties.type_of_lease
-          : "N/A" +
-            "<br>" +
-            "Period Of Lease: " +
-            feature.properties.period_of_lease
+          : "N/A" + "<br>";
+      popupContent +=
+        "Period Of Lease " + feature.properties.period_of_lease
           ? feature.properties.period_of_lease
-          : "N/A" + "<br>" + "Land Use: " + feature.properties.land_use
+          : "N/A" + "<br>";
+      popupContent +=
+        "Land Use " + feature.properties.land_use
           ? feature.properties.land_use
           : "N/A" + "<br>";
       if (feature.properties && feature.properties.popupContent) {
@@ -116,21 +118,21 @@ window.onload = function () {
               }</h3>`
             : "<h3><a href='/accounts/login'>Login</a> to view owner</h3>";
           selectedItem.innerHTML = `
-          <h2>Shamba</h2>
+          <h3>Shamba Details</h3>
           ${ownerContent}
-          <h3>Balance: ${
+          <p>Balance: ${
             feature.properties.balance
               ? feature.properties.balance.toLocaleString()
               : "N/A"
-          }</h3>
-          <h3>Zone: ${
+          }</p>
+          <p>Zone: ${
             feature.properties.zone ? feature.properties.zone : "N/A"
-          }</h3>
-          <h3>Type Of Lease: ${
+          }</p>
+          <p>Type Of Lease: ${
             feature.properties.type_of_lease
               ? feature.properties.type_of_lease
               : "N/A"
-          }</h3>
+          }</p>
           `;
         },
       });
