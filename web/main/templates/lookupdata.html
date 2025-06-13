@@ -59,6 +59,7 @@
   var shambadata = {{ shambas| safe}};
   var countydata = {{ counties| safe}};
   var constituenciesdata = {{ constituencies| safe}};
+  var authenticated = "{{ request.user.is_authenticated | safe}}" === "True";
 </script>
 <script type="text/javascript" src="{% static 'leaflet/leaflet.js' %}"></script>
 <script type="text/javascript" src="{% static 'leaflet.zoomhome.min.js' %}"></script>
