@@ -113,10 +113,10 @@ window.onload = function () {
         click: function (e) {
           map.fitBounds(e.target.getBounds(), { padding: [100, 100] });
           var ownerContent = authenticated
-            ? `<h3>Owner: ${
+            ? `<p>Owner: ${
                 feature.properties.owner ? feature.properties.owner : "N/A"
-              }</h3>`
-            : "<h3><a href='/accounts/login'>Login</a> to view owner</h3>";
+              }</p>`
+            : "<p><a href='/accounts/login'>Login</a> to view owner</p>";
           selectedItem.innerHTML = `
           <h3>Shamba Details</h3>
           ${ownerContent}
