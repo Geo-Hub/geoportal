@@ -85,7 +85,7 @@ window.onload = function () {
         }</p>
         <p>Name: ${feature.properties.owner ? feature.properties.owner : ""}</p>
         <p>Zone: ${feature.properties.zone ? feature.properties.zone : ""}</p>
-        <p>Type Of Lease ${
+        <p>Type Of Lease: ${
           feature.properties.type_of_lease
             ? feature.properties.type_of_lease
             : ""
