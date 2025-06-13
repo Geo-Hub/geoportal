@@ -21,7 +21,7 @@
   <tbody>
     {% for item in data %}
     <tr>
-      <td>{{item.id}}</td>
+      <td>{{ forloop.counter }}</td>
       <td>{{item.balance}}</td>
       <td>{{item.owner}}</td>
       <td>{{item.type_of_lease}}</td>
