@@ -34,7 +34,7 @@ echo "${0}: collecting statics files."
 venv/bin/python manage.py collectstatic --noinput
 
 echo "Loading GIS data into the DB."
-unzip data.zip -d /app/main/management/load_scripts/
+unzip /app/data.zip -d /app/main/management/load_scripts/
 venv/bin/python manage.py load_gis_data
 
 rm -rf /app/main/management/load_scripts/data
