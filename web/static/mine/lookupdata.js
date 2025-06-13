@@ -77,31 +77,32 @@ window.onload = function () {
 
   var shambas = L.geoJson(shambadata, {
     onEachFeature: function (feature, layer) {
-      var popupContent = "";
-      popupContent +=
-        "Balance " + feature.properties.balance
-          ? feature.properties.balance.toLocaleString()
-          : "N/A" + "<br>";
-      popupContent +=
-        "Name " + feature.properties.owner
-          ? feature.properties.owner
-          : "N/A" + "<br>";
-      popupContent +=
-        "Zone " + feature.properties.zone
-          ? feature.properties.zone
-          : "N/A" + "<br>";
-      popupContent +=
-        "Type Of Lease " + feature.properties.type_of_lease
-          ? feature.properties.type_of_lease
-          : "N/A" + "<br>";
-      popupContent +=
-        "Period Of Lease " + feature.properties.period_of_lease
-          ? feature.properties.period_of_lease
-          : "N/A" + "<br>";
-      popupContent +=
-        "Land Use " + feature.properties.land_use
-          ? feature.properties.land_use
-          : "N/A" + "<br>";
+      var popupContent = `
+        <p>Balance: ${
+          feature.properties.balance
+            ? feature.properties.balance.toLocaleString()
+            : "N/A"
+        }</p>
+        <p>Name: ${
+          feature.properties.owner ? feature.properties.owner : "N/A"
+        }</p>
+        <p>Zone: ${
+          feature.properties.zone ? feature.properties.zone : "N/A"
+        }</p>
+        <p>Type Of Lease ${
+          feature.properties.type_of_lease
+            ? feature.properties.type_of_lease
+            : "N/A"
+        }</p>
+        <p>Period Of Lease: ${
+          feature.properties.period_of_lease
+            ? feature.properties.period_of_lease
+            : "N/A"
+        }</p>
+        <p>Land Use: ${
+          feature.properties.land_use ? feature.properties.land_use : "N/A"
+        }</p>
+      `;
       if (feature.properties && feature.properties.popupContent) {
         popupContent += feature.properties.popupContent;
       }
