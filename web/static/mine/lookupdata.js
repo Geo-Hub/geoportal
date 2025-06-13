@@ -83,22 +83,23 @@ window.onload = function () {
         htmlName = "Name: " + name + "<br>";
       }
       var popupContent =
-        "Balance " +
-        feature.properties.balance?.toLocaleString() +
-        "<br>" +
-        htmlName +
-        "Zone: " +
-        feature.properties.zone +
-        "<br>" +
-        "Type Of Lease: " +
-        feature.properties.type_of_lease +
-        "<br>" +
-        "Period Of Lease: " +
-        feature.properties.period_of_lease +
-        "<br>" +
-        "Land Use: " +
-        feature.properties.land_use +
-        "<br>";
+        "Balance " + feature.properties.balance
+          ? feature.properties.balance.toLocaleString()
+          : "N/A" + "<br>" + htmlName + "Zone: " + feature.properties.zone
+          ? feature.properties.zone
+          : "N/A" +
+            "<br>" +
+            "Type Of Lease: " +
+            feature.properties.type_of_lease
+          ? feature.properties.type_of_lease
+          : "N/A" +
+            "<br>" +
+            "Period Of Lease: " +
+            feature.properties.period_of_lease
+          ? feature.properties.period_of_lease
+          : "N/A" + "<br>" + "Land Use: " + feature.properties.land_use
+          ? feature.properties.land_use
+          : "N/A" + "<br>";
       if (feature.properties && feature.properties.popupContent) {
         popupContent += feature.properties.popupContent;
       }
@@ -110,14 +111,26 @@ window.onload = function () {
         click: function (e) {
           map.fitBounds(e.target.getBounds(), { padding: [100, 100] });
           var ownerContent = authenticated
-            ? `<h3>Owner: ${feature.properties.owner}</h3>`
+            ? `<h3>Owner: ${
+                feature.properties.owner ? feature.properties.owner : "N/A"
+              }</h3>`
             : "<h3><a href='/accounts/login'>Login</a> to view owner</h3>";
           selectedItem.innerHTML = `
           <h2>Shamba</h2>
           ${ownerContent}
-          <h3>Balance: ${feature.properties.balance?.toLocaleString()}</h3>
-          <h3>Zone: ${feature.properties.zone}</h3>
-          <h3>Type Of Lease: ${feature.properties.type_of_lease}</h3>
+          <h3>Balance: ${
+            feature.properties.balance
+              ? feature.properties.balance.toLocaleString()
+              : "N/A"
+          }</h3>
+          <h3>Zone: ${
+            feature.properties.zone ? feature.properties.zone : "N/A"
+          }</h3>
+          <h3>Type Of Lease: ${
+            feature.properties.type_of_lease
+              ? feature.properties.type_of_lease
+              : "N/A"
+          }</h3>
           `;
         },
       });
