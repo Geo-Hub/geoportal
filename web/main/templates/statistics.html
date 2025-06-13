@@ -22,12 +22,12 @@
     {% for item in data %}
     <tr>
       <td>{{ forloop.counter }}</td>
-      <td>{{item.balance}}</td>
-      <td>{{item.owner}}</td>
-      <td>{{item.type_of_lease}}</td>
-      <td>{{item.period_of_lease}}</td>
-      <td>{{item.zone}}</td>
-      <td>{{item.land_use}}</td>
+      <td>{{ item.balance|default:"" }}</td>
+      <td>{{item.owner|default:""}}</td>
+      <td>{{item.type_of_lease|default:""}}</td>
+      <td>{{item.period_of_lease|default:""}}</td>
+      <td>{{item.zone|default:""}}</td>
+      <td>{{item.land_use|default:""}}</td>
     </tr>
     {% endfor %}
   </tbody>
