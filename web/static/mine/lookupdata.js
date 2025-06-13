@@ -84,7 +84,7 @@ window.onload = function () {
       }
       var popupContent =
         "Balance " +
-        feature.properties.balance +
+        feature.properties.balance?.toLocaleString() +
         "<br>" +
         htmlName +
         "Zone: " +
@@ -109,10 +109,13 @@ window.onload = function () {
         },
         click: function (e) {
           map.fitBounds(e.target.getBounds(), { padding: [100, 100] });
+          var ownerContent = authenticated
+            ? `<h3>Owner: ${feature.properties.owner}</h3>`
+            : "<h3><a href='/accounts/login'>Login</a> to view owner</h3>";
           selectedItem.innerHTML = `
           <h2>Shamba</h2>
-          <h3>Owner: ${feature.properties.owner}</h3>
-          <h3>Balance: ${feature.properties.balance}</h3>
+          ${ownerContent}
+          <h3>Balance: ${feature.properties.balance?.toLocaleString()}</h3>
           <h3>Zone: ${feature.properties.zone}</h3>
           <h3>Type Of Lease: ${feature.properties.type_of_lease}</h3>
           `;
