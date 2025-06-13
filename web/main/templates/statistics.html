@@ -22,15 +22,9 @@
   <tbody>
     {% for item in data %}
     <tr>
-      <td>{{ forloop.counter }}</td>
+      <td>{{item.id}}</td>
       <td>{{item.balance}}</td>
-      <td>
-        {% if user.is_authenticated %}
-        {{item.owner}}
-        {% else %}
-        N/A
-        {% endif %}
-      </td>
+      <td>{{item.owner}}</td>
       <td>{{item.type_of_lease}}</td>
       <td>{{item.period_of_lease}}</td>
       <td>{{item.zone}}</td>
