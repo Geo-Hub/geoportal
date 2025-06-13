@@ -20,9 +20,9 @@
     </tr>
   </thead>
   <tbody>
-    {% for index, item in data.items %}
+    {% for item in data %}
     <tr>
-      <td>{{index}}</td>
+      <td>{{ forloop.counter }}</td>
       <td>{{item.balance}}</td>
       <td>
         {% if user.is_authenticated %}
