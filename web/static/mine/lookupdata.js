@@ -81,26 +81,22 @@ window.onload = function () {
         <p>Balance: ${
           feature.properties.balance
             ? "Ksh " + feature.properties.balance.toLocaleString()
-            : "N/A"
+            : ""
         }</p>
-        <p>Name: ${
-          feature.properties.owner ? feature.properties.owner : "N/A"
-        }</p>
-        <p>Zone: ${
-          feature.properties.zone ? feature.properties.zone : "N/A"
-        }</p>
+        <p>Name: ${feature.properties.owner ? feature.properties.owner : ""}</p>
+        <p>Zone: ${feature.properties.zone ? feature.properties.zone : ""}</p>
         <p>Type Of Lease ${
           feature.properties.type_of_lease
             ? feature.properties.type_of_lease
-            : "N/A"
+            : ""
         }</p>
         <p>Period Of Lease: ${
           feature.properties.period_of_lease
             ? feature.properties.period_of_lease
-            : "N/A"
+            : ""
         }</p>
         <p>Land Use: ${
-          feature.properties.land_use ? feature.properties.land_use : "N/A"
+          feature.properties.land_use ? feature.properties.land_use : ""
         }</p>
       `;
       if (feature.properties && feature.properties.popupContent) {
@@ -115,7 +111,7 @@ window.onload = function () {
           map.fitBounds(e.target.getBounds(), { padding: [100, 100] });
           var ownerContent = authenticated
             ? `<p>Owner: ${
-                feature.properties.owner ? feature.properties.owner : "N/A"
+                feature.properties.owner ? feature.properties.owner : ""
               }</p>`
             : "<p><a href='/accounts/login'>Login</a> to view owner</p>";
           selectedItem.innerHTML = `
@@ -124,15 +120,13 @@ window.onload = function () {
           <p>Balance: ${
             feature.properties.balance
               ? "Ksh " + feature.properties.balance.toLocaleString()
-              : "N/A"
+              : ""
           }</p>
-          <p>Zone: ${
-            feature.properties.zone ? feature.properties.zone : "N/A"
-          }</p>
+          <p>Zone: ${feature.properties.zone ? feature.properties.zone : ""}</p>
           <p>Type Of Lease: ${
             feature.properties.type_of_lease
               ? feature.properties.type_of_lease
-              : "N/A"
+              : ""
           }</p>
           `;
         },
