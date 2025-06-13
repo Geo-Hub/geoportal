@@ -5,8 +5,7 @@
 <p1>Parcel Items</p1>
 {% if not user.is_authenticated %}
 <p><a href="{% url 'login' %}">Login</a> to view ownership details.</p>
-{% else %}
-</p>
+{% endif %}
 <table class="table table-bordered">
   <thead>
     <tr>
