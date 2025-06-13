@@ -80,7 +80,7 @@ window.onload = function () {
       var popupContent = `
         <p>Balance: ${
           feature.properties.balance
-            ? feature.properties.balance.toLocaleString()
+            ? "Ksh " + feature.properties.balance.toLocaleString()
             : "N/A"
         }</p>
         <p>Name: ${
@@ -123,7 +123,7 @@ window.onload = function () {
           ${ownerContent}
           <p>Balance: ${
             feature.properties.balance
-              ? feature.properties.balance.toLocaleString()
+              ? "Ksh " + feature.properties.balance.toLocaleString()
               : "N/A"
           }</p>
           <p>Zone: ${
