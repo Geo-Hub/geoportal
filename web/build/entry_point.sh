@@ -44,5 +44,5 @@ echo "Starting webserver"
 if [ "$DEBUG" == "True" ]; then
     venv/bin/python manage.py runserver 0.0.0.0:8000
 else
-    venv/bin/python -m gunicorn --bind 0.0.0.0:8000 geoportal.wsgi
+    venv/bin/python -m gunicorn --bind 0.0.0.0:8000 geoportal.wsgi --workers 1 --threads 2 --timeout 120
 fi
