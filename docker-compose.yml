@@ -3,8 +3,6 @@ services:
     image: postgis/postgis:16-3.4-alpine
     volumes:
       - db_data:/var/lib/postgresql/data
-    env_file:
-      - .env
     environment:
       - POSTGRES_PASSWORD=${PGPASSWORD}
       - POSTGRES_USER=${PGUSER}
@@ -18,8 +16,6 @@ services:
       context: .
     depends_on:
       - postgres
-    env_file:
-      - .env
     environment:
       - PGHOST=${PGHOST}
       - PGPORT=${PGPORT}
