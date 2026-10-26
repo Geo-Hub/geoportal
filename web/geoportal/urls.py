@@ -13,13 +13,17 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+from django.templatetags.static import static as static_url
 from django.urls import include, path
+from django.views.generic import RedirectView
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
+    # Clients that skip the <link rel="icon"> tags request /favicon.ico directly
+    path('favicon.ico', RedirectView.as_view(url=static_url('favicon/favicon.ico'), permanent=True)),
     path(r'', include('main.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
