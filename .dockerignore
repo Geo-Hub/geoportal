@@ -1,0 +1,4 @@
+.git
+.env
+# Mounted at runtime by the compose files instead of baked into the image
+web/data.zip

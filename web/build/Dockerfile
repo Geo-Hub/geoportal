@@ -3,7 +3,7 @@ FROM ghcr.io/osgeo/gdal:alpine-small-3.6.3
 WORKDIR /app
 
 # install python and requirements
-RUN apk add --no-cache python3 py3-pip py3-virtualenv python3-dev libpq bash geos unzip
+RUN apk add --no-cache python3 py3-pip py3-virtualenv python3-dev libpq bash geos
 
 # create a virtual env
 RUN python3 -m venv venv
