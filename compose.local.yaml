@@ -32,7 +32,6 @@ services:
       PGDATABASE: geoportal
       PGUSER: geoportal
       PGPASSWORD: geoportal_dev
-      MAPBOX_ACCESS_TOKEN: ${MAPBOX_ACCESS_TOKEN:-}
     volumes:
       # Seed data for empty GIS tables; kept out of the image (.dockerignore)
       - ./web/data.zip:/seed/data.zip:ro

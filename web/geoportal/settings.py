@@ -34,6 +34,11 @@ CSRF_TRUSTED_ORIGINS = ['https://geoportal.victorngeno.com']
 # and CSRF origin checks see https
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+# Send our origin (not full URLs) as the Referer on cross-site requests. OSM's
+# tile servers block requests without a Referer, which Django's default
+# "same-origin" policy strips, and serve an "Access blocked" tile instead.
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
 SITE_URL = "http://localhost:8002"
 # Application definition
 
@@ -120,18 +125,6 @@ REGISTRATION_OPEN = False
 
 SITE_ID=1
 
-#leaflet settings
-# Public (pk.) Mapbox token for the Satellite tiles; set in the deploy host's .env
-MAPBOX_ACCESS_TOKEN = os.environ.get("MAPBOX_ACCESS_TOKEN", "")
-LEAFLET_CONFIG = {
-    # conf here
-    'TILES': [
-    ('OSM', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {'attribution': '&copy; Big eye'}),
-    ('Satellite', 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + MAPBOX_ACCESS_TOKEN, {
-    'maxZoom': 18,
-    'id': 'mapbox.streets-satellite'})
-    ]
-}
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
