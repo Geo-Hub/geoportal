@@ -1,0 +1,88 @@
+services:
+  # PostGIS Database
+  postgres:
+    image: postgis/postgis:18-3.6-alpine
+    container_name: geoportal-postgres
+    restart: unless-stopped
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "2"
+        loki-batch-size: "100"
+        loki-external-labels: "job={{.Name}}"
+    # No ports exposed - internal network only
+    environment:
+      POSTGRES_DB: ${PGDATABASE}
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+    volumes:
+      # Postgres 18+ keeps data in a versioned subdirectory of /var/lib/postgresql
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER} -d ${PGDATABASE}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Django app (gunicorn + whitenoise), routed by the server's external Traefik.
+  web:
+    build:
+      dockerfile: ./web/build/Dockerfile
+      context: .
+    container_name: geoportal-web
+    restart: unless-stopped
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-retries: "2"
+        loki-batch-size: "100"
+        loki-external-labels: "job={{.Name}}"
+    # No ports exposed - Traefik reaches it over the traefik-proxy network
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: "False"
+      PGHOST: postgres
+      PGPORT: 5432
+      PGDATABASE: ${PGDATABASE}
+      PGUSER: ${PGUSER}
+      PGPASSWORD: ${PGPASSWORD}
+      EMAIL_HOST: ${EMAIL_HOST}
+      EMAIL_PORT: ${EMAIL_PORT:-587}
+      EMAIL_USE_TLS: ${EMAIL_USE_TLS:-true}
+      EMAIL_USE_SSL: ${EMAIL_USE_SSL:-false}
+      EMAIL_HOST_USER: ${EMAIL_HOST_USER}
+      EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
+      DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL}
+      MAPBOX_ACCESS_TOKEN: ${MAPBOX_ACCESS_TOKEN:-}
+    volumes:
+      # Seed data for empty GIS tables; kept out of the image (.dockerignore)
+      - ./web/data.zip:/seed/data.zip:ro
+    networks:
+      - default
+      - traefik-proxy
+    depends_on:
+      postgres:
+        condition: service_healthy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.geoportal.rule=Host(`geoportal.victorngeno.com`)
+      - traefik.http.routers.geoportal.entrypoints=https
+      - traefik.http.routers.geoportal.service=geoportal
+      - traefik.http.services.geoportal.loadbalancer.server.port=8000
+
+# Docker Networks
+networks:
+  traefik-proxy:
+    external: true
+  default:
+    internal: true # No external access
+
+# Docker Volumes
+volumes:
+  postgres_data:
+    driver: local
