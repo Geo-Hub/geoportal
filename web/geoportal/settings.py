@@ -34,6 +34,11 @@ CSRF_TRUSTED_ORIGINS = ['https://geoportal.victorngeno.com']
 # and CSRF origin checks see https
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+# Send our origin (not full URLs) as the Referer on cross-site requests. OSM's
+# tile servers block requests without a Referer, which Django's default
+# "same-origin" policy strips, and serve an "Access blocked" tile instead.
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
 SITE_URL = "http://localhost:8002"
 # Application definition
 
