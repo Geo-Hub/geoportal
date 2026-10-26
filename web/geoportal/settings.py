@@ -24,11 +24,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False) == "True"
 
-ALLOWED_HOSTS = ['139.162.243.214', 'victorngeno.com', 'geoportal.victorngeno.com']
+ALLOWED_HOSTS = ['geoportal.victorngeno.com']
 if DEBUG is True:
     ALLOWED_HOSTS.append("localhost")
 
 CSRF_TRUSTED_ORIGINS = ['https://geoportal.victorngeno.com']
+
+# TLS terminates at Traefik; trust its forwarded scheme so request.is_secure()
+# and CSRF origin checks see https
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SITE_URL = "http://localhost:8002"
 # Application definition
@@ -117,11 +121,13 @@ REGISTRATION_OPEN = False
 SITE_ID=1
 
 #leaflet settings
+# Public (pk.) Mapbox token for the Satellite tiles; set in the deploy host's .env
+MAPBOX_ACCESS_TOKEN = os.environ.get("MAPBOX_ACCESS_TOKEN", "")
 LEAFLET_CONFIG = {
     # conf here
     'TILES': [
     ('OSM', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {'attribution': '&copy; Big eye'}),
-    ('Satellite', 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
+    ('Satellite', 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + MAPBOX_ACCESS_TOKEN, {
     'maxZoom': 18,
     'id': 'mapbox.streets-satellite'})
     ]
@@ -129,14 +135,28 @@ LEAFLET_CONFIG = {
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-# email settings
-EMAIL_HOST_USER = "victor@mail.victorngeno.com"
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = "Victor <{}>".format(EMAIL_HOST_USER)
+# Email Configuration
+if not DEBUG:
+    EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+    # Production email settings - these should be set in production
+    EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
+    EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+    EMAIL_USE_TLS = (
+        os.environ.get("EMAIL_USE_TLS", "True").lower() == "true"
+    )  # port 587 typically uses TLS
+    EMAIL_USE_SSL = (
+        os.environ.get("EMAIL_USE_SSL", "False").lower() == "true"
+    )  # port 465 typically uses SSL
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+    DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL") or "victorngeno@baruamail.com"
+    SERVER_EMAIL = DEFAULT_FROM_EMAIL
+else:
+    # Development - use console backend for easy testing
+    EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 
 
-ADMINS = [('Victor', EMAIL_HOST_USER)]
+ADMINS = [('Victor', "victorngeno@baruamail.com")]
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -149,6 +169,4 @@ DATABASES = {
         "PORT": os.environ["PGPORT"],
     },
 }
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 SECRET_KEY = os.environ["SECRET_KEY"]
