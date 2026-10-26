@@ -26,10 +26,15 @@ These are run in the terminal.
 1. cd into your projects directory.
 2. Clone this repo `git clone https://github.com/Geo-Hub/geoportal.git`
 3. cd into the newly created folder `cd geoportal`
-4. Copy `.env.sample` file into `.env` with `cp .env.sample .env`
-5. Update the values in the `.env` to your specifics.
-6. Run `docker compose up --build`
-7. Load the webserver from [http://localhost:8002](http://localhost:8002)
+4. Run `docker compose -f compose.local.yaml watch` (no `.env` needed; it uses dev defaults and prints emails to the console)
+5. Load the webserver from [http://localhost:8000](http://localhost:8000)
+
+The GIS data in `web/data.zip` is mounted into the container (not baked into the image) and loaded into any empty tables on startup, so the first run takes a little longer.
+
+##### _Production_
+`docker compose -f compose.prod.yaml up -d --build` on the server. It expects the server's external Traefik on the
+`traefik-proxy` network (with the `https` entrypoint), routes `geoportal.victorngeno.com`, and reads a `.env` copied
+from `.env.sample`. PostGIS sits on an internal-only network.
 
 #### Contributors (Team GeoHub)
 

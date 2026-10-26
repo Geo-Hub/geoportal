@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgis/postgis:18-3.6-alpine
+    container_name: geoportal_postgres_dev
+    restart: no
+    # No ports exposed - avoids clashing with other local Postgres instances
+    environment:
+      POSTGRES_DB: geoportal
+      POSTGRES_USER: geoportal
+      POSTGRES_PASSWORD: geoportal_dev
+    volumes:
+      # Postgres 18+ keeps data in a versioned subdirectory of /var/lib/postgresql
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U geoportal -d geoportal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    container_name: geoportal_web_dev
+    restart: no
+    build:
+      dockerfile: ./web/build/Dockerfile
+      context: .
+    environment:
+      SECRET_KEY: ${SECRET_KEY:-local-dev-secret-key}
+      # True runs Django's dev server with DEBUG on (allows localhost).
+      DEBUG: ${DEBUG:-True}
+      PGHOST: postgres
+      PGPORT: 5432
+      PGDATABASE: geoportal
+      PGUSER: geoportal
+      PGPASSWORD: geoportal_dev
+      MAPBOX_ACCESS_TOKEN: ${MAPBOX_ACCESS_TOKEN:-}
+    volumes:
+      # Seed data for empty GIS tables; kept out of the image (.dockerignore)
+      - ./web/data.zip:/seed/data.zip:ro
+    ports:
+      - "8000:8000" # Exposed for local browsing at http://localhost:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    develop:
+      watch:
+        - path: web/
+          action: sync # the code will be rebuilt by django StatReloader
+          target: /app/
+
+        - action: rebuild
+          path: ./web/build/requirements.txt
+
+volumes:
+  postgres_data:

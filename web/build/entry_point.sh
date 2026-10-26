@@ -33,12 +33,10 @@ echo "${0}: collecting statics files."
 
 venv/bin/python manage.py collectstatic --noinput
 
+# Loads the shapefiles from the mounted /seed/data.zip only into tables that
+# are still empty, so this is a no-op on every start after the first.
 echo "Loading GIS data into the DB."
-unzip /app/data.zip -d /app/main/management/load_scripts/
 venv/bin/python manage.py load_gis_data
-
-rm -rf /app/main/management/load_scripts/data
-rm data.zip
 
 echo "Starting webserver"
 if [ "$DEBUG" == "True" ]; then
