@@ -120,18 +120,6 @@ REGISTRATION_OPEN = False
 
 SITE_ID=1
 
-#leaflet settings
-# Public (pk.) Mapbox token for the Satellite tiles; set in the deploy host's .env
-MAPBOX_ACCESS_TOKEN = os.environ.get("MAPBOX_ACCESS_TOKEN", "")
-LEAFLET_CONFIG = {
-    # conf here
-    'TILES': [
-    ('OSM', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {'attribution': '&copy; Big eye'}),
-    ('Satellite', 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + MAPBOX_ACCESS_TOKEN, {
-    'maxZoom': 18,
-    'id': 'mapbox.streets-satellite'})
-    ]
-}
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 

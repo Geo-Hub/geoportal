@@ -58,7 +58,6 @@ services:
       EMAIL_HOST_USER: ${EMAIL_HOST_USER}
       EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
       DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL}
-      MAPBOX_ACCESS_TOKEN: ${MAPBOX_ACCESS_TOKEN:-}
     volumes:
       # Seed data for empty GIS tables; kept out of the image (.dockerignore)
       - ./web/data.zip:/seed/data.zip:ro
