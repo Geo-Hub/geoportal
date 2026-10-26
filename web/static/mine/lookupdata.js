@@ -1,11 +1,8 @@
 window.onload = function () {
-  var osmlayer = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+  var osmlayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
     attribution:
-      'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    id: "mapbox.streets",
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   });
   var none_layer = L.tileLayer("", {
     maxZoom: 18,
