@@ -1,5 +1,6 @@
 Django>=5.1.10
 django-crispy-forms==2.0
+crispy-bootstrap3==2024.1
 django-registration==3.3
 gunicorn==23.0.0
 psycopg==3.2.6

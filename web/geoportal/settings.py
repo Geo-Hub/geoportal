@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django_registration',
     'crispy_forms',
+    'crispy_bootstrap3',
     'main',
 )
 
@@ -124,6 +125,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static","media_root")
 REGISTRATION_OPEN = False
 
 SITE_ID=1
+
+# crispy-forms 2.x ships no template packs; the site uses Bootstrap 3
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap3"
+CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
